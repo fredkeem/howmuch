@@ -14,10 +14,10 @@ const Black = () => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'black',
+        backgroundColor: 'green',
       }}
       onPress={goToBlue}>
-      <Text style={{color: 'white'}}>This is Black!</Text>
+      <Text style={{color: 'white'}}>This is Green!</Text>
     </TouchableOpacity>
   );
 };

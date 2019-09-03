@@ -1,0 +1,3 @@
+export default {
+  BALANCE_LOGIN_RESPONSE: 'USER_BALANCE_LOGIN_RESPONSE',
+};
