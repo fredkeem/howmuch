@@ -38,7 +38,7 @@ class TabIcon extends Component {
     };
 
     const color = this.props.focused ? '#47ffd3ff' : '#efefefff';
-    console.log(this.props);
+    // console.log(this.props);
     return (
       <View style={{alignItems: 'center'}}>
         <Image
@@ -87,12 +87,15 @@ export default class AppRouter extends Component {
     });
 
     return (
-      <Router getSceneStyle={getSceneStyle}>
+      <Router
+        getSceneStyle={getSceneStyle}
+        createReducer={this.reducerCreate.bind(this)}
+        backAndroidHandler={this.backHandler.bind(this)}>
         <Overlay>
           <Modal hideNavBar>
             <Lightbox>
               <Stack key="root" hideNavBar>
-                <Scene key={'start'} component={Start} />
+                <Scene key={'start'} component={Start} initial />
                 <Scene key={'phoneLogin'} component={PhoneLogin} />
                 <Scene key={'emailLogin'} component={EmailLogin} />
                 <Scene key={'register'} component={Register} />

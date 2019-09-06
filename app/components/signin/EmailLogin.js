@@ -6,15 +6,21 @@ import {
   View,
   TouchableOpacity,
   Text,
-  AsyncStorage,
+  // AsyncStorage,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import styles from '../signin/SigninStyles';
 import SelectOptionButton from '../button/SelectOptionButton';
-import {loginUser} from '../../api';
+// import {connect} from 'react-redux';
+import {loginUser} from '../../redux/users.actions';
+// import {saveUserToken} from '../../redux/actions';
 import _ from 'lodash';
 
 export default class EmailLogin extends Component {
+  static navigationOptions = {
+    title: 'Please sign in',
+  };
   constructor(props) {
     super(props);
     this.state = {
@@ -22,31 +28,22 @@ export default class EmailLogin extends Component {
       password: '',
       errorMessage: '',
       loader: false,
-      coins: [],
     };
   }
 
-  componentDidMount() {
-    // this.loginUser();
-    // console.log(this.state);
-  }
-
-  async loginUser() {
+  async onPressLoginUser() {
     try {
-      const {user, error} = await loginUser(
-        this.state.email,
-        this.state.password,
+      const {error} = await DISPATCH(
+        loginUser(this.state.email, this.state.password),
       );
+
       if (!_.isEmpty(error)) {
         return alert(error);
       } else {
-        Actions.black();
-        // console.log(error);
+        GO('black');
       }
     } catch (e) {
       console.log(e);
-    } finally {
-      this.setState({loading: false});
     }
   }
 
@@ -84,7 +81,7 @@ export default class EmailLogin extends Component {
                 // selectTextColor={loginButtonColorOption.darkBlueColor}
                 // defaultTextColor={loginButtonColorOption.blueColor}
                 text="Login"
-                onPressOutButton={() => this.loginUser()}
+                onPressOutButton={() => this.onPressLoginUser()}
               />
             </View>
           </ScrollView>
@@ -93,3 +90,16 @@ export default class EmailLogin extends Component {
     );
   }
 }
+
+// const mapStateToProps = state => ({
+//   token: state.token,
+// });
+
+// const mapDispatchToProps = dispatch => ({
+//   saveUserToken: () => dispatch(saveUserToken()),
+// });
+
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps,
+// )(EmailLogin);
