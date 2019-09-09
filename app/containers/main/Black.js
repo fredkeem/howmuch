@@ -5,32 +5,43 @@ import AsyncStorage from '@react-native-community/async-storage';
 import Action from '../../redux/actions';
 import {connect} from 'react-redux';
 import {Home, Game, User, ActivityType} from '../../config/type';
+import {getUserInfo} from '../../redux/main.reducer';
 // import {removeUserToken} from '../../redux/users.actions';
 
 type Props = {
   user: User,
+  challengeUser: User,
 };
 
+connect(state => ({
+  challengeUser: state.main.challengeUser,
+}));
 export default class Black extends Component {
   // static navigationOptions = {
   //   title: 'Welcome to the app!',
   // };
-
-  remove() {
-    AsyncStorage.removeItem('accessToken');
-    Actions.popTo('start');
+  props: Props;
+  state: State;
+  constructor(props) {
+    super(props);
   }
-
-  componentDidMount() {
-    console.log(this.props);
-  }
-
   onPressLogOut() {
     ALERT2(T('my_info.logout_confirm'), async () => {
       await DISPATCH({type: Action.BALANCE_LOGOUT, payload: null});
       POP('start');
     });
   }
+
+  // async componentDidMount() {
+  //   try {
+  //     // this.startLoading();
+  //     const r = await DISPATCH(getUserInfo(this.props.user.id));
+  //   } catch (e) {
+  //     ERROR(e);
+  //   } finally {
+  //     // this.startLoading(false);
+  //   }
+  // }
 
   render() {
     return (

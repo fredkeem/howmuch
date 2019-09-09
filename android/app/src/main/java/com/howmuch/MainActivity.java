@@ -1,4 +1,4 @@
-package com.howmuch;
+package com.zikto.howmuch;
 
 import com.facebook.react.ReactActivity;
 

@@ -1,4 +1,4 @@
-package com.howmuch;
+package com.zikto.howmuch;
 
 import android.app.Application;
 import android.content.Context;
