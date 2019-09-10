@@ -16,6 +16,7 @@ import Black from './main/Black';
 import Blue from './main/Blue';
 import Yellow from './main/Yellow';
 import Green from './main/Green';
+import Navy from './main/Navy';
 import Register from '../components/Register';
 import PhoneLogin from '../components/signin/PhoneLogin';
 import EmailLogin from '../components/signin/EmailLogin';
@@ -35,9 +36,10 @@ class TabIcon extends Component {
       blue: asset.logo,
       yellow: asset.logo,
       green: asset.logo,
+      navy: asset.logo,
     };
 
-    const color = this.props.focused ? '#47ffd3ff' : '#efefefff';
+    const color = this.props.focused ? '#1E2746' : '#efefefff';
     // console.log(this.props);
     return (
       <View style={{alignItems: 'center'}}>
@@ -146,6 +148,14 @@ export default class AppRouter extends Component {
                     icon={TabIcon}
                     hideNavBar
                     title="Green"
+                  />
+                  <Scene
+                    name="navy"
+                    key="navy"
+                    component={Navy}
+                    icon={TabIcon}
+                    hideNavBar
+                    title="Navy"
                   />
                 </Tabs>
               </Stack>

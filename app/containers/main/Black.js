@@ -3,9 +3,8 @@ import {TouchableOpacity, Text, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import AsyncStorage from '@react-native-community/async-storage';
 import Action from '../../redux/actions';
-import {connect} from 'react-redux';
+// import {connect} from 'react-redux';
 import {Home, Game, User, ActivityType} from '../../config/type';
-import {getUserInfo} from '../../redux/main.reducer';
 // import {removeUserToken} from '../../redux/users.actions';
 
 type Props = {
@@ -13,9 +12,6 @@ type Props = {
   challengeUser: User,
 };
 
-connect(state => ({
-  challengeUser: state.main.challengeUser,
-}));
 export default class Black extends Component {
   // static navigationOptions = {
   //   title: 'Welcome to the app!',
@@ -25,8 +21,9 @@ export default class Black extends Component {
   constructor(props) {
     super(props);
   }
+
   onPressLogOut() {
-    ALERT2(T('my_info.logout_confirm'), async () => {
+    ALERT2(T('로그아웃'), async () => {
       await DISPATCH({type: Action.BALANCE_LOGOUT, payload: null});
       POP('start');
     });

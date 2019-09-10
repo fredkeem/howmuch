@@ -63,10 +63,10 @@ GLOBAL.ALERT2 = (title, onPress: () => void) => {
 GLOBAL.IOS = Platform.OS === 'ios';
 GLOBAL.ANDROID = !IOS;
 
-GLOBAL.ERROR = (error: string | Error, tags: ?any, context: ?any) => {
-  LOG(error);
-  PROD && SENTRY(error, tags, context, 'error');
-};
+// GLOBAL.ERROR = (error: string | Error, tags: ?any, context: ?any) => {
+//   LOG(error);
+//   PROD && SENTRY(error, tags, context, 'error');
+// };
 
 GLOBAL.DISPATCH = (promise: Promise) => store.dispatch(promise);
 GLOBAL.width = width;
