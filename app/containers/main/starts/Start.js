@@ -13,7 +13,7 @@ export default class Start extends Component {
     console.log(accessToken);
 
     if (!_.isEmpty(accessToken)) {
-      GO('blue');
+      GO('black');
     }
   };
 

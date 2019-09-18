@@ -49,6 +49,28 @@ axios.interceptors.response.use(
   },
 );
 
+const api = axios.create({
+  baseURL: 'https://openapi.naver.com/v1/search/',
+  headers: {
+    'X-Naver-Client-Id': 'Q9A3_TH7mYK56xE0lKzZ',
+    'X-Naver-Client-Secret': 'dhpu10wSTt',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Credentials': 'true',
+  },
+});
+
+export const article = {
+  showSearch: term =>
+    api.get('shop.json', {
+      params: {
+        query: term,
+        start: 1,
+        display: 10,
+        sort: 'sim',
+      },
+    }),
+};
+
 const withTimeoutNetwork = promise => {
   const timeout = new Promise((resolve, reject) => {
     setTimeout(() => {

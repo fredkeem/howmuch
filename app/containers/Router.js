@@ -18,8 +18,8 @@ import Yellow from './main/Yellow';
 import Green from './main/Green';
 import Navy from './main/Navy';
 import Register from '../components/Register';
-import PhoneLogin from '../components/signin/PhoneLogin';
-import EmailLogin from '../components/signin/EmailLogin';
+import PhoneLogin from './main/signin/PhoneLogin';
+import EmailLogin from './main/signin/EmailLogin';
 import Start from '../containers/main/starts/Start';
 import asset from '../config/asset';
 

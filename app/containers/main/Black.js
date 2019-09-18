@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, Text, View} from 'react-native';
+import {TouchableOpacity, Text, View, Image} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import AsyncStorage from '@react-native-community/async-storage';
 import Action from '../../redux/actions';
 // import {connect} from 'react-redux';
 import {Home, Game, User, ActivityType} from '../../config/type';
+import {article} from '../../api';
 // import {removeUserToken} from '../../redux/users.actions';
 
 type Props = {
@@ -13,13 +14,33 @@ type Props = {
 };
 
 export default class Black extends Component {
-  // static navigationOptions = {
-  //   title: 'Welcome to the app!',
-  // };
-  props: Props;
-  state: State;
   constructor(props) {
     super(props);
+  }
+
+  props: Props;
+  state: State;
+
+  state = {
+    searchObject: null,
+  };
+
+  async componentDidMount() {
+    const term = '아이패드';
+    try {
+      const {
+        data: {items: searchObject},
+      } = await article.showSearch(term);
+      this.setState({
+        searchObject,
+      });
+    } catch (e) {
+      console.log(e);
+    } finally {
+      this.setState({
+        searchObject,
+      });
+    }
   }
 
   onPressLogOut() {
@@ -41,6 +62,8 @@ export default class Black extends Component {
   // }
 
   render() {
+    // const {hello} = this.state;
+    console.log(this.state);
     return (
       <View
         style={{
@@ -52,6 +75,18 @@ export default class Black extends Component {
           backgroundColor: 'black',
         }}>
         <Text style={{color: 'white'}}>This is Black!</Text>
+        {this.state.searchObject && this.state.searchObject.length > 0 && (
+          <View>
+            {this.state.searchObject.map(hi => (
+              <View>
+                <Text style={{color: 'white'}}>
+                  아이폰XS {hi.lprice} / {hi.hprice}
+                </Text>
+              </View>
+            ))}
+            <Text style={{color: 'white'}} />
+          </View>
+        )}
         <TouchableOpacity
           style={{
             width: 100,
