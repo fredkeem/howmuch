@@ -48,9 +48,11 @@ class TabIcon extends Component {
           style={{marginTop: 10, width: 27, height: 20, tintColor: color}}
           resizeMode="contain"
         />
-        <Text style={{marginTop: 5, color, fontSize: 10, fontWeight: 'bold'}}>
-          {this.props.title}
-        </Text>
+        {this.props.focused && (
+          <Text style={{marginTop: 5, color, fontSize: 10, fontWeight: 'bold'}}>
+            {this.props.title}
+          </Text>
+        )}
       </View>
     );
   }
