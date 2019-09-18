@@ -12,7 +12,7 @@ import {
   Lightbox,
   Actions,
 } from 'react-native-router-flux';
-import Black from './main/Black';
+import Home from './main/Home';
 import Blue from './main/Blue';
 import Yellow from './main/Yellow';
 import Green from './main/Green';
@@ -32,7 +32,7 @@ class TabIcon extends Component {
 
   render() {
     const images = {
-      black: asset.logo,
+      home: asset.logo,
       blue: asset.logo,
       yellow: asset.logo,
       green: asset.logo,
@@ -71,7 +71,7 @@ export default class AppRouter extends Component {
   }
 
   backHandler() {
-    if (Actions.currentScene !== 'black') {
+    if (Actions.currentScene !== 'home') {
       POP();
     } else {
       ALERT2('앱을 종료 하시겠습니까?', () => {
@@ -113,17 +113,17 @@ export default class AppRouter extends Component {
                   panHandlers={null}
                   tabBarStyle={{
                     backgroundColor: 'white',
-                    height: 60,
+                    height: 50,
                     borderTopWidth: 1,
                     borderColor: '#CECECE',
                   }}>
                   <Scene
-                    name="black"
-                    key="black"
-                    component={Black}
+                    name="home"
+                    key="home"
+                    component={Home}
                     icon={TabIcon}
                     hideNavBar
-                    title="Black"
+                    title="Home"
                   />
                   <Scene
                     name="blue"

@@ -40,7 +40,7 @@ export default class EmailLogin extends Component {
       if (!_.isEmpty(error)) {
         return alert(error);
       } else {
-        GO('black');
+        GO('home');
       }
     } catch (e) {
       console.log(e);

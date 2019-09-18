@@ -59,13 +59,13 @@ const api = axios.create({
   },
 });
 
-export const article = {
+export const object = {
   showSearch: term =>
     api.get('shop.json', {
       params: {
         query: term,
         start: 1,
-        display: 10,
+        display: 100,
         sort: 'sim',
       },
     }),
