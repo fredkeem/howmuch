@@ -65,7 +65,7 @@ export const object = {
       params: {
         query: term,
         start: 1,
-        display: 100,
+        display: 1,
         sort: 'sim',
       },
     }),

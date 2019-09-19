@@ -23,63 +23,116 @@ const PointText = styled.Text`
 
 const SWIPER_HEIGHT = layout.height / 3;
 
-export default class SwiperComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
+const SwiperComponent = () => {
+  const amount = numeral(18000000).format('0,0');
 
-  state = {
-    amount: 180000000,
-  };
+  return (
+    <Swiper
+      style={{height: SWIPER_HEIGHT}}
+      showsButtons={false}
+      autoplay={true}
+      autoplayTimeout={3}
+      dotColor={`${TINT_COLOR}`}
+      activeDotColor={`${TINT_COLOR}`}
+      activeDotStyle={{width: 30}}>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <WhiteText>2019. 09. 18</WhiteText>
+        <WhiteText>대출 가능한 금액</WhiteText>
+        <View style={{marginVertical: 20}}>
+          {/* <Text>asd</Text> */}
+          <PointText>{amount} 원</PointText>
+        </View>
+        <Slider />
+      </View>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <WhiteText>2019. 09. 18</WhiteText>
+        <WhiteText>대출 가능한 금액</WhiteText>
+        <View style={{marginVertical: 20}}>
+          {/* <Text>asd</Text> */}
+          <PointText>{amount} 원</PointText>
+        </View>
+        <Slider />
+      </View>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <WhiteText>2019. 09. 18</WhiteText>
+        <WhiteText>대출 가능한 금액</WhiteText>
+        <View style={{marginVertical: 20}}>
+          {/* <Text>asd</Text> */}
+          <PointText>{amount} 원</PointText>
+        </View>
+        <Slider />
+      </View>
+      <View style={{justifyContent: 'center', alignItems: 'center'}}>
+        <WhiteText>2019. 09. 18</WhiteText>
+        <WhiteText>대출 가능한 금액</WhiteText>
+        <View style={{marginVertical: 20}}>
+          {/* <Text>asd</Text> */}
+          <PointText>{amount} 원</PointText>
+        </View>
+        <Slider />
+      </View>
+    </Swiper>
+  );
+  // }
+};
 
-  render() {
-    const amount = numeral(this.state.amount).format('0,0');
-    console.log(amount);
+export default SwiperComponent;
 
-    return (
-      <Swiper
-        style={{height: SWIPER_HEIGHT}}
-        showsButtons={false}
-        // autoplay={true}
-        autoplayTimeout={3}
-        dotColor={`${TINT_COLOR}`}
-        activeDotColor={`${TINT_COLOR}`}
-        activeDotStyle={{width: 30}}>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <WhiteText>2019. 09. 18</WhiteText>
-          <WhiteText>대출 가능한 금액</WhiteText>
-          <View style={{marginVertical: 20}}>
-            <PointText>{amount} 원</PointText>
-          </View>
-          <Slider />
-        </View>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <WhiteText>2019. 09. 18</WhiteText>
-          <WhiteText>대출 가능한 금액</WhiteText>
-          <View style={{marginVertical: 20}}>
-            <PointText>{amount} 원</PointText>
-          </View>
-          <Slider />
-        </View>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <WhiteText>2019. 09. 18</WhiteText>
-          <WhiteText>대출 가능한 금액</WhiteText>
-          <View style={{marginVertical: 20}}>
-            <PointText>{amount} 원</PointText>
-          </View>
-          <Slider />
-        </View>
-        <View style={{justifyContent: 'center', alignItems: 'center'}}>
-          <WhiteText>2019. 09. 18</WhiteText>
-          <WhiteText>대출 가능한 금액</WhiteText>
-          <View style={{marginVertical: 20}}>
-            <PointText>{amount} 원</PointText>
-          </View>
-          <Slider />
-        </View>
-      </Swiper>
-    );
-  }
-}
+// export default class SwiperComponent extends Component {
+//   constructor(props) {
+//     super(props);
+//   }
 
-// AppRegistry.registerComponent('myproject', () => SwiperComponent);
+//   state = {
+//     amount: 180000000,
+//   };
+
+//   render() {
+//     const amount = numeral(this.state.amount).format('0,0');
+//     console.log(amount);
+
+//     return (
+//       <Swiper
+//         style={{height: SWIPER_HEIGHT}}
+//         showsButtons={false}
+//         autoplay={true}
+//         autoplayTimeout={3}
+//         dotColor={`${TINT_COLOR}`}
+//         activeDotColor={`${TINT_COLOR}`}
+//         activeDotStyle={{width: 30}}>
+//         <View style={{justifyContent: 'center', alignItems: 'center'}}>
+//           <WhiteText>2019. 09. 18</WhiteText>
+//           <WhiteText>대출 가능한 금액</WhiteText>
+//           <View style={{marginVertical: 20}}>
+//             <PointText>{amount} 원</PointText>
+//           </View>
+//           <Slider />
+//         </View>
+//         <View style={{justifyContent: 'center', alignItems: 'center'}}>
+//           <WhiteText>2019. 09. 18</WhiteText>
+//           <WhiteText>대출 가능한 금액</WhiteText>
+//           <View style={{marginVertical: 20}}>
+//             <PointText>{amount} 원</PointText>
+//           </View>
+//           <Slider />
+//         </View>
+//         <View style={{justifyContent: 'center', alignItems: 'center'}}>
+//           <WhiteText>2019. 09. 18</WhiteText>
+//           <WhiteText>대출 가능한 금액</WhiteText>
+//           <View style={{marginVertical: 20}}>
+//             <PointText>{amount} 원</PointText>
+//           </View>
+//           <Slider />
+//         </View>
+//         <View style={{justifyContent: 'center', alignItems: 'center'}}>
+//           <WhiteText>2019. 09. 18</WhiteText>
+//           <WhiteText>대출 가능한 금액</WhiteText>
+//           <View style={{marginVertical: 20}}>
+//             <PointText>{amount} 원</PointText>
+//           </View>
+//           <Slider />
+//         </View>
+//       </Swiper>
+//     );
+//   }
+// }

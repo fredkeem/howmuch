@@ -11,10 +11,10 @@ import user from '../../api/userInfo';
 import Loader from '../../components/Loader';
 import Base from '../Base';
 import asset from '../../config/asset';
-
 import styled from 'styled-components';
-
 import SwiperComponent from '../../components/SwipeScreen';
+import SwiperBanner from '../../components/SwiperBanner';
+import TextTicker from '../../components/TextTicker';
 import {BG_COLOR} from '../../config/colors';
 
 const Container = styled.View`
@@ -106,6 +106,10 @@ export default class HomeScene extends Base {
             <SwiperComponent />
           </View>
         </Container>
+        <View>
+          <TextTicker />
+        </View>
+        <View style={{margin: 10}}>{/* <SwiperBanner /> */}</View>
 
         {/* {this.state.searchObject && this.state.searchObject.length > 0 && (
               <View>
