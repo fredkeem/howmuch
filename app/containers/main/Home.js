@@ -19,7 +19,8 @@ import {BG_COLOR} from '../../config/colors';
 
 const Container = styled.View`
   background-color: ${BG_COLOR};
-  padding-vertical: 30;
+  padding-top: 40;
+  padding-horizontal: 5;
 `;
 
 type Props = {
@@ -88,7 +89,7 @@ export default class HomeScene extends Base {
             style={{
               justifyContent: 'flex-end',
               flexDirection: 'row',
-              marginVertical: 20,
+              marginVertical: 30,
             }}>
             <Image
               style={{width: 40, height: 25}}
@@ -101,7 +102,9 @@ export default class HomeScene extends Base {
               source={asset.logo}
             />
           </View>
-          <SwiperComponent />
+          <View style={{marginTop: 30}}>
+            <SwiperComponent />
+          </View>
         </Container>
 
         {/* {this.state.searchObject && this.state.searchObject.length > 0 && (
