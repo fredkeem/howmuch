@@ -2,8 +2,10 @@ import React, {Component} from 'react';
 import {TouchableOpacity, Text, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import SelectOptionButton from '../../../components/button/SelectOptionButton';
-// import userInfo from '../../../api/userInfo';
+import userInfo from '../../../api/userInfo';
+import {authUser} from '../../../redux/users.actions';
 import AsyncStorage from '@react-native-community/async-storage';
+// import {connect} from 'react-redux';
 import _ from 'lodash';
 
 export default class Start extends Component {

@@ -1,15 +1,15 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, ActivityIndicator} from 'react-native';
+import styled from 'styled-components';
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  position: absolute;
+`;
 
 export default () => (
-  <View
-    style={{
-      width: '100%',
-      height: ' 100%',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-    <Text>Loading....</Text>
-  </View>
+  <Container>
+    <ActivityIndicator color="#0000ff" size="large" />
+  </Container>
 );

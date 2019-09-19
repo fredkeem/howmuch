@@ -34,7 +34,6 @@ export default class App extends Component {
   }
   render() {
     // const {isReady} = this.state;
-
     return (
       <Provider store={store}>
         {this.state.isReady ? <Router /> : <View />}

@@ -4,7 +4,7 @@ import {Actions} from 'react-native-router-flux';
 
 const Blue = () => {
   const goToBlack = () => {
-    Actions.black();
+    Actions.home();
   };
   return (
     <TouchableOpacity

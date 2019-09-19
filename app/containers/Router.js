@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {View, Text, Image, BackHandler} from 'react-native';
+import {View, Text, Image, BackHandler, TouchableOpacity} from 'react-native';
 import {
   Scene,
   Router,
@@ -16,7 +16,7 @@ import Home from './main/Home';
 import Blue from './main/Blue';
 import Yellow from './main/Yellow';
 import Green from './main/Green';
-import Navy from './main/Navy';
+import Profile from './main/Profile';
 import Register from '../components/Register';
 import PhoneLogin from './main/signin/PhoneLogin';
 import EmailLogin from './main/signin/EmailLogin';
@@ -32,24 +32,24 @@ class TabIcon extends Component {
 
   render() {
     const images = {
-      home: asset.logo,
+      home: asset.home,
       blue: asset.logo,
       yellow: asset.logo,
       green: asset.logo,
-      navy: asset.logo,
+      profile: asset.my_page,
     };
 
     const color = this.props.focused ? '#1E2746' : '#efefefff';
     // console.log(this.props);
     return (
-      <View style={{alignItems: 'center'}}>
+      <View style={{alignItems: 'center', justifyContent: 'center'}}>
         <Image
           source={images[this.props.name]}
-          style={{marginTop: 10, width: 27, height: 20, tintColor: color}}
+          style={{marginTop: 5, width: 40, height: 25, tintColor: color}}
           resizeMode="contain"
         />
         {this.props.focused && (
-          <Text style={{marginTop: 5, color, fontSize: 10, fontWeight: 'bold'}}>
+          <Text style={{color, fontSize: 10, fontWeight: 'bold'}}>
             {this.props.title}
           </Text>
         )}
@@ -115,7 +115,7 @@ export default class AppRouter extends Component {
                   panHandlers={null}
                   tabBarStyle={{
                     backgroundColor: 'white',
-                    height: 50,
+                    height: 60,
                     borderTopWidth: 1,
                     borderColor: '#CECECE',
                   }}>
@@ -152,12 +152,12 @@ export default class AppRouter extends Component {
                     title="Green"
                   />
                   <Scene
-                    name="navy"
-                    key="navy"
-                    component={Navy}
+                    name="profile"
+                    key="profile"
+                    component={Profile}
                     icon={TabIcon}
                     hideNavBar
-                    title="Navy"
+                    title="Profile"
                   />
                 </Tabs>
               </Stack>
