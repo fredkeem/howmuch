@@ -109,7 +109,9 @@ export default class HomeScene extends Base {
         <View>
           <TextTicker />
         </View>
-        <View style={{margin: 10}}>{/* <SwiperBanner /> */}</View>
+        <View style={{margin: 10}}>
+          <SwiperBanner />
+        </View>
 
         {/* {this.state.searchObject && this.state.searchObject.length > 0 && (
               <View>
