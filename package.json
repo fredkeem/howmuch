@@ -26,6 +26,7 @@
     "react-native-axios": "^0.17.1",
     "react-native-device-info": "^2.3.2",
     "react-native-i18n": "^2.0.15",
+    "react-native-number-ticker": "^0.1.5",
     "react-native-router-flux": "^4.0.6",
     "react-native-slider": "^0.11.0",
     "react-native-snap-carousel": "^3.8.1",

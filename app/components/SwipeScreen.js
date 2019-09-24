@@ -8,6 +8,9 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
+// import NumberTicker from 'react-native-number-ticker';
+import NumberTicker from '../components/CustomNumberTicker';
+
 import {TINT_COLOR, BG_COLOR, POINT_COLOR} from '../config/colors';
 import Swiper from 'react-native-swiper';
 import Carousel, {ParallaxImage, Pagination} from 'react-native-snap-carousel';
@@ -53,7 +56,7 @@ export default class SwiperComponent extends Component {
     super(props);
 
     this.state = {
-      amount: 180000000,
+      amount: 182311412,
       swiperBanner: [
         {
           date: '2019. 09. 17',
@@ -143,7 +146,16 @@ export default class SwiperComponent extends Component {
                 backgroundColor: `${POINT_COLOR}`,
               }}
             />
-            <PointText>{leftAmount}</PointText>
+            <NumberTicker
+              number={leftAmount}
+              duration={3000}
+              textStyle={{
+                fontFamily: 'SpoqaHanSans-Bold',
+                color: `${POINT_COLOR}`,
+                letterSpacing: 2,
+                lineHeight: 53,
+              }}
+            />
           </View>
           <Slider />
           {/* </TouchableOpacity> */}
