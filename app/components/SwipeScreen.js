@@ -68,39 +68,12 @@ export default class SwiperComponent extends Component {
   }
   componentDidMount() {}
 
-  get pagination() {
-    const {swiperBanner, slider1ActiveSlide} = this.state;
-    return (
-      <Pagination
-        containerStyle={{
-          paddingVertical: 10,
-        }}
-        dotsLength={swiperBanner.length}
-        activeDotIndex={slider1ActiveSlide}
-        dotStyle={{
-          width: 24,
-          height: 4,
-          borderRadius: 5,
-          backgroundColor: '#DCDCDC',
-        }}
-        inactiveDotStyle={{
-          width: 10,
-          height: 10,
-          borderRadius: 5,
-        }}
-        inactiveDotOpacity={0.4}
-        inactiveDotScale={0.6}
-      />
-    );
-  }
-
   _renderSwiperCardContainer = ({item, index}) => {
     const {slider1ActiveSlide, amount} = this.state;
     const leftAmount = numeral(amount).format('0,0');
     if (slider1ActiveSlide === 0) {
       return (
         <SwiperCardContainer>
-          {/* <TouchableOpacity> */}
           <View
             style={{
               flexDirection: 'row',
@@ -158,7 +131,6 @@ export default class SwiperComponent extends Component {
             />
           </View>
           <Slider />
-          {/* </TouchableOpacity> */}
         </SwiperCardContainer>
       );
     } else {
@@ -194,7 +166,6 @@ export default class SwiperComponent extends Component {
           hasParallaxImages={true}
           onSnapToItem={index => this.setState({slider1ActiveSlide: index})}
         />
-        {/* {this.pagination} */}
       </View>
     );
   }

@@ -23,6 +23,7 @@ import EmailLogin from './main/signin/EmailLogin';
 import Start from '../containers/main/starts/Start';
 import asset from '../config/asset';
 import ProductRegistration from './ProductRegistration';
+import Tutorial from './information/Tutorials';
 
 class TabIcon extends Component {
   props: {
@@ -108,6 +109,7 @@ export default class AppRouter extends Component {
                   key={'productRegistration'}
                   component={ProductRegistration}
                 />
+                <Scene key={'tutorial'} component={Tutorial} />
                 <Tabs
                   key="tabsContainer"
                   showLabel={false}

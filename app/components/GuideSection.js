@@ -46,7 +46,7 @@ const GuideSectionItem = ({resource, action}) => (
 const GuideSectionItems = () => (
   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
     <GuideSectionItem
-      action={GOF('camera')}
+      action={GOF('tutorial')}
       resource={{
         image: asset.icon.laptop,
         title: '노트북',
