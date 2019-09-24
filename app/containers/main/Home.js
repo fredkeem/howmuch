@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, Text, View, Image, ScrollView} from 'react-native';
-import {Actions} from 'react-native-router-flux';
-import AsyncStorage from '@react-native-community/async-storage';
-import Action from '../../redux/actions';
-import {connect} from 'react-redux';
+// import {Actions} from 'react-native-router-flux';
+// import AsyncStorage from '@react-native-community/async-storage';
+// import Action from '../../redux/actions';
+// import {connect} from 'react-redux';
 import {Home, Game, User, ActivityType} from '../../config/type';
-import {object} from '../../api';
+// import {object} from '../../api';
 // import {removeUserToken} from '../../redux/users.actions';
-import user from '../../api/userInfo';
+// import user from '../../api/userInfo';
 import Loader from '../../components/Loader';
 import Base from '../Base';
 import asset from '../../config/asset';
@@ -15,12 +15,18 @@ import styled from 'styled-components';
 import SwiperComponent from '../../components/SwipeScreen';
 import SwiperBanner from '../../components/SwiperBanner';
 import TextTicker from '../../components/TextTicker';
-import {BG_COLOR} from '../../config/colors';
+import {BG_COLOR, POINT_COLOR} from '../../config/colors';
+import GuideSection, {GuideSectionItems} from '../../components/GuideSection';
 
-const Container = styled.View`
-  background-color: ${BG_COLOR};
-  padding-top: 40;
-  padding-horizontal: 5;
+// const Container = styled.View`
+//   padding-top: 40;
+// `;
+const Container = styled.View``;
+
+const SectionTitle = styled.Text`
+  font-size: 14px;
+  font-family: 'SpoqaHanSans-Bold';
+  letter-spacing: 1;
 `;
 
 type Props = {
@@ -30,9 +36,9 @@ type Props = {
 type State = {};
 
 export default class HomeScene extends Base {
-  // constructor(props) {
-  //   super(props);
-  // }
+  constructor(props) {
+    super(props);
+  }
 
   props: Props;
   state: State;
@@ -85,34 +91,20 @@ export default class HomeScene extends Base {
     ) : (
       <ScrollView>
         <Container>
-          <View
-            style={{
-              justifyContent: 'flex-end',
-              flexDirection: 'row',
-              marginVertical: 30,
-            }}>
-            <Image
-              style={{width: 40, height: 25}}
-              resizeMode="contain"
-              source={asset.logo}
-            />
-            <Image
-              style={{width: 50, height: 25}}
-              resizeMode="contain"
-              source={asset.logo}
-            />
-          </View>
-          <View style={{marginTop: 30}}>
+          <View>
             <SwiperComponent />
           </View>
         </Container>
-        <View>
-          <TextTicker />
+        <TextTicker />
+        <View style={{margin: 20, marginRight: 0}}>
+          <SectionTitle>촬영 가이드</SectionTitle>
+          <GuideSection />
         </View>
-        <View style={{margin: 10}}>
+        <View style={{margin: 20, marginRight: 0}}>
+          <SectionTitle>얼마야 혜택</SectionTitle>
           <SwiperBanner />
         </View>
-
+        <View />
         {/* {this.state.searchObject && this.state.searchObject.length > 0 && (
               <View>
                 {this.state.searchObject.map(item => (

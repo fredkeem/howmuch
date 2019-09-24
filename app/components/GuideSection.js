@@ -13,21 +13,21 @@ import asset from '../config/asset';
 
 const ItemBubble = styled.TouchableOpacity`
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   margin-top: 10px;
   margin-right: 25px;
 `;
 
 const ImageContainer = styled.View`
-  width: 210px;
-  height: 100px;
-  border-radius: 10px
+  width: 60px;
+  height: 60px;
+  border-radius: 50px
   background-color: ${POINT_COLOR};
   justify-content: center;
   align-items: center;
 `;
 
-const BannerSectionItem = ({resource, action}) => (
+const GuideSectionItem = ({resource, action}) => (
   <ItemBubble onPress={action}>
     <ImageContainer>
       <Image
@@ -43,37 +43,37 @@ const BannerSectionItem = ({resource, action}) => (
   </ItemBubble>
 );
 
-const BannerSectionItems = () => (
+const GuideSectionItems = () => (
   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-    <BannerSectionItem
+    <GuideSectionItem
       action={GOF('camera')}
       resource={{
         image: asset.icon.laptop,
         title: '노트북',
       }}
     />
-    <BannerSectionItem
+    <GuideSectionItem
       action={GOF('camera')}
       resource={{
         image: asset.icon.compouter,
         title: '데스크탑',
       }}
     />
-    <BannerSectionItem
+    <GuideSectionItem
       action={GOF('camera')}
       resource={{
         image: asset.icon.bag,
         title: '가방',
       }}
     />
-    <BannerSectionItem
+    <GuideSectionItem
       action={GOF('camera')}
       resource={{
         image: asset.icon.watch,
         title: '시계',
       }}
     />
-    <BannerSectionItem
+    <GuideSectionItem
       action={GOF('camera')}
       resource={{
         image: asset.icon.watch,
@@ -83,13 +83,13 @@ const BannerSectionItems = () => (
   </ScrollView>
 );
 
-export default class SwiperBanner extends Component {
+export default class GuideSection extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
 
   render() {
-    return <BannerSectionItems />;
+    return <GuideSectionItems />;
   }
 }

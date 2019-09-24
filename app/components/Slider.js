@@ -7,7 +7,6 @@ import {TINT_COLOR, POINT_COLOR} from '../config/colors';
 const Container = styled.View`
   width: 100%;
   justify-content: center;
-  padding-horizontal: 30;
 `;
 
 const WhiteText = styled.Text`
@@ -39,6 +38,14 @@ export default class SliderComponent extends Component {
           minimumValue={0}
           minimumTrackTintColor={`${POINT_COLOR}`}
           thumbTintColor={`${POINT_COLOR}`}
+          trackStyle={{
+            height: 2,
+            shadowOffset: {width: 1, height: 3},
+            shadowColor: 'black',
+            shadowOpacity: 2.0,
+          }}
+          thumbStyle={{width: 14, height: 14}}
+          style={{height: 20}}
           step={1}
           value={this.state.sliderValue}
           onValueChange={sliderValue => this.setState({sliderValue})}

@@ -14,7 +14,7 @@ import {
 } from 'react-native-router-flux';
 import Home from './main/Home';
 import Blue from './main/Blue';
-import Yellow from './main/Yellow';
+import Camera from './main/Camera';
 import Green from './main/Green';
 import Profile from './main/Profile';
 import Register from '../components/Register';
@@ -22,6 +22,7 @@ import PhoneLogin from './main/signin/PhoneLogin';
 import EmailLogin from './main/signin/EmailLogin';
 import Start from '../containers/main/starts/Start';
 import asset from '../config/asset';
+import ProductRegistration from './ProductRegistration';
 
 class TabIcon extends Component {
   props: {
@@ -34,7 +35,7 @@ class TabIcon extends Component {
     const images = {
       home: asset.home,
       blue: asset.logo,
-      yellow: asset.logo,
+      camera: asset.logo,
       green: asset.logo,
       profile: asset.my_page,
     };
@@ -103,6 +104,10 @@ export default class AppRouter extends Component {
                 <Scene key={'phoneLogin'} component={PhoneLogin} />
                 <Scene key={'emailLogin'} component={EmailLogin} />
                 <Scene key={'register'} component={Register} />
+                <Scene
+                  key={'productRegistration'}
+                  component={ProductRegistration}
+                />
                 <Tabs
                   key="tabsContainer"
                   showLabel={false}
@@ -136,12 +141,12 @@ export default class AppRouter extends Component {
                     title="Blue"
                   />
                   <Scene
-                    name="yellow"
-                    key="yellow"
-                    component={Yellow}
+                    name="camera"
+                    key="camera"
+                    component={Camera}
                     icon={TabIcon}
                     hideNavBar
-                    title="yellow"
+                    title="Camera"
                   />
                   <Scene
                     name="green"
