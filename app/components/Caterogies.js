@@ -33,10 +33,6 @@ const ImageSection = styled.View`
   margin-bottom: 10px;
 `;
 
-_press = () => {
-  GO('ProductRegistration');
-};
-
 const CategoriesItems = ({resource, action}) => (
   <CategoriesItem>
     <TouchableOpacity
@@ -54,7 +50,7 @@ const CategoriesItems = ({resource, action}) => (
 
 const _renderCategoriesItem = () => (
   <CategoriesItems
-    action={GOF('productRegistration')}
+    action={GOF('camera')}
     resource={{
       title: 'asd',
     }}

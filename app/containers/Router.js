@@ -14,7 +14,7 @@ import {
 } from 'react-native-router-flux';
 import Home from './main/Home';
 import Blue from './main/Blue';
-import Camera from './main/Camera';
+import Product from './main/Product';
 import Green from './main/Green';
 import Profile from './main/Profile';
 import Register from '../components/Register';
@@ -24,6 +24,7 @@ import Start from '../containers/main/starts/Start';
 import asset from '../config/asset';
 import ProductRegistration from './ProductRegistration';
 import Tutorial from './information/Tutorials';
+import Camera from './main/Camera';
 
 class TabIcon extends Component {
   props: {
@@ -36,7 +37,7 @@ class TabIcon extends Component {
     const images = {
       home: asset.home,
       blue: asset.logo,
-      camera: asset.logo,
+      product: asset.logo,
       green: asset.logo,
       profile: asset.my_page,
     };
@@ -110,6 +111,7 @@ export default class AppRouter extends Component {
                   component={ProductRegistration}
                 />
                 <Scene key={'tutorial'} component={Tutorial} />
+                <Scene key={'camera'} component={Camera} />
                 <Tabs
                   key="tabsContainer"
                   showLabel={false}
@@ -143,12 +145,12 @@ export default class AppRouter extends Component {
                     title="Blue"
                   />
                   <Scene
-                    name="camera"
-                    key="camera"
-                    component={Camera}
+                    name="product"
+                    key="product"
+                    component={Product}
                     icon={TabIcon}
                     hideNavBar
-                    title="Camera"
+                    title="Product"
                   />
                   <Scene
                     name="green"
