@@ -25,36 +25,60 @@ const SECTIONS = {
       background: asset.icon.watch,
     },
   ],
-  activity: [
+  laptop: [
     {
-      subtitle: '나의 활동 내역을 체크해보는 것은\n언제나 성공의 지름길!',
-      title: '내 활동 내역을 체크해봐요',
-      background: asset.home,
+      subtitle:
+        '1. 손목 시계는 인덱스의 프린트 상태 \n2. 오토매틱일 경우 디스플레이백 상태 \n3. 시계 외형 손상 정도 \n4. 검증 가능한 시리얼 번호',
+      title: '노트북 촬영 가이드',
+      background: asset.icon.laptop,
     },
     {
       subtitle:
-        '더챌린지에서는 여러가지의\n디바이스를 사용할 수 있어요.\n\n그 중에서 그 날 제일 많이 걸은 디바이스' +
-        '\n기준으로 그 날 걸음 수가 책정됩니다!\n\n여러 디바이스 등록하면 웨어러블 디바이스를\n놓고와도 문제 없죠!',
-      title: '상세보기를 눌러보세요',
-      background: asset.home,
-    },
-    {
-      subtitle: '그래프를 클릭하면 해당 날짜에\n걸었던 걸음 수가 표시 됩니다.',
-      title: '내가 얼마나 걸었더라..?',
-      background: asset.home,
+        '1. 박스 보존 상태 \n2. 보증서 보유 \n3. 구입 당시의 영수증 \n4. A/S 기간',
+      title: '노트북 촬영 가이드',
+      background: asset.icon.laptop,
     },
   ],
-  ranking: [
+  computer: [
     {
-      subtitle: '내 순위와 날짜에 따른 전체 랭킹을 체크해보세요',
-      title: '나는 몇등일까?',
-      background: asset.home,
+      subtitle:
+        '1. 손목 시계는 인덱스의 프린트 상태 \n2. 오토매틱일 경우 디스플레이백 상태 \n3. 시계 외형 손상 정도 \n4. 검증 가능한 시리얼 번호',
+      title: '데스크탑 촬영 가이드',
+      background: asset.icon.computer,
     },
     {
       subtitle:
-        '타 유저의 섬네일을 클릭하면\n그들의 정보를 볼 수 있어요\n\n그들의 평균 걸음 수를 계산해서\n더 앞설 수 있게 노력해봐요!',
-      title: '다른 유저들은?',
-      background: asset.home,
+        '1. 박스 보존 상태 \n2. 보증서 보유 \n3. 구입 당시의 영수증 \n4. A/S 기간',
+      title: '데스크탑 촬영 가이드',
+      background: asset.icon.computer,
+    },
+  ],
+  bag: [
+    {
+      subtitle:
+        '1. 손목 시계는 인덱스의 프린트 상태 \n2. 오토매틱일 경우 디스플레이백 상태 \n3. 시계 외형 손상 정도 \n4. 검증 가능한 시리얼 번호',
+      title: '가방 촬영 가이드',
+      background: asset.icon.bag,
+    },
+    {
+      subtitle:
+        '1. 박스 보존 상태 \n2. 보증서 보유 \n3. 구입 당시의 영수증 \n4. A/S 기간',
+      title: '가방 촬영 가이드',
+      background: asset.icon.bag,
+    },
+  ],
+  watch: [
+    {
+      subtitle:
+        '1. 손목 시계는 인덱스의 프린트 상태 \n2. 오토매틱일 경우 디스플레이백 상태 \n3. 시계 외형 손상 정도 \n4. 검증 가능한 시리얼 번호',
+      title: '손목 시계 촬영 가이드',
+      background: asset.icon.watch,
+    },
+    {
+      subtitle:
+        '1. 박스 보존 상태 \n2. 보증서 보유 \n3. 구입 당시의 영수증 \n4. A/S 기간',
+      title: '손목 시계 촬영 가이드',
+      background: asset.icon.watch,
     },
   ],
   new: [
@@ -253,7 +277,7 @@ export default class TutorialHome extends Base {
       <View style={{position: 'relative'}}>
         <Container>
           <BaseHeader
-            title={'홈 사용 설명'}
+            title={'물품 촬영 가이드'}
             closed
             style={{backgroundColor: '#E4E4E4'}}
           />

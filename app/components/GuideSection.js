@@ -43,45 +43,45 @@ const GuideSectionItem = ({resource, action}) => (
   </ItemBubble>
 );
 
-const GuideSectionItems = () => (
-  <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-    <GuideSectionItem
-      action={GOF('tutorial')}
-      resource={{
-        image: asset.icon.laptop,
-        title: '노트북',
-      }}
-    />
-    <GuideSectionItem
-      action={GOF('camera')}
-      resource={{
-        image: asset.icon.compouter,
-        title: '데스크탑',
-      }}
-    />
-    <GuideSectionItem
-      action={GOF('camera')}
-      resource={{
-        image: asset.icon.bag,
-        title: '가방',
-      }}
-    />
-    <GuideSectionItem
-      action={GOF('camera')}
-      resource={{
-        image: asset.icon.watch,
-        title: '시계',
-      }}
-    />
-    <GuideSectionItem
-      action={GOF('camera')}
-      resource={{
-        image: asset.icon.watch,
-        title: '아이폰',
-      }}
-    />
-  </ScrollView>
-);
+// const GuideSectionItems = () => (
+//   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+//     <GuideSectionItem
+//       action={this.actionTest.bind(this)}
+//       resource={{
+//         image: asset.icon.laptop,
+//         title: '노트북',
+//       }}
+//     />
+//     <GuideSectionItem
+//       action={GOF('tutorial')}
+//       resource={{
+//         image: asset.icon.compouter,
+//         title: '데스크탑',
+//       }}
+//     />
+//     <GuideSectionItem
+//       action={GOF('tutorial')}
+//       resource={{
+//         image: asset.icon.bag,
+//         title: '가방',
+//       }}
+//     />
+//     <GuideSectionItem
+//       action={GOF('tutorial')}
+//       resource={{
+//         image: asset.icon.watch,
+//         title: '시계',
+//       }}
+//     />
+//     <GuideSectionItem
+//       action={GOF('tutorial')}
+//       resource={{
+//         image: asset.icon.watch,
+//         title: '아이폰',
+//       }}
+//     />
+//   </ScrollView>
+// );
 
 export default class GuideSection extends Component {
   constructor(props) {
@@ -89,7 +89,58 @@ export default class GuideSection extends Component {
     this.state = {};
   }
 
+  onPressGuideLaptop() {
+    GO('tutorial', {tutorialType: 'laptop'});
+  }
+  onPressGuideComputer() {
+    GO('tutorial', {tutorialType: 'computer'});
+  }
+  onPressGuideBag() {
+    GO('tutorial', {tutorialType: 'bag'});
+  }
+  onPressGuideWatch() {
+    GO('tutorial', {tutorialType: 'watch'});
+  }
+
   render() {
-    return <GuideSectionItems />;
+    return (
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <GuideSectionItem
+          action={this.onPressGuideLaptop}
+          resource={{
+            image: asset.icon.laptop,
+            title: '노트북',
+          }}
+        />
+        <GuideSectionItem
+          action={this.onPressGuideComputer}
+          resource={{
+            image: asset.icon.computer,
+            title: '데스크탑',
+          }}
+        />
+        <GuideSectionItem
+          action={this.onPressGuideBag}
+          resource={{
+            image: asset.icon.bag,
+            title: '가방',
+          }}
+        />
+        <GuideSectionItem
+          action={this.onPressGuideWatch}
+          resource={{
+            image: asset.icon.watch,
+            title: '시계',
+          }}
+        />
+        <GuideSectionItem
+          action={this.onPressGuideWatch}
+          resource={{
+            image: asset.icon.watch,
+            title: '아이폰',
+          }}
+        />
+      </ScrollView>
+    );
   }
 }

@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 // import NumberTicker from 'react-native-number-ticker';
 import NumberTicker from '../components/CustomNumberTicker';
-
+import moment from 'moment';
 import {TINT_COLOR, BG_COLOR, POINT_COLOR} from '../config/colors';
 import Swiper from 'react-native-swiper';
 import Carousel, {ParallaxImage, Pagination} from 'react-native-snap-carousel';
@@ -48,6 +48,18 @@ const SwiperCardContainer = styled.View`
   background-color: ${BG_COLOR};
 `;
 
+const TopIconContainer = styled.View`
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 30px;
+`;
+
+const TopIcon = styled.Image`
+  width: 25px;
+  height: 25px;
+  border-radius: 30px;
+`;
+
 const SWIPER_HEIGHT = layout.height / 3;
 const sliderWidth = width;
 
@@ -71,38 +83,25 @@ export default class SwiperComponent extends Component {
   _renderSwiperCardContainer = ({item, index}) => {
     const {slider1ActiveSlide, amount} = this.state;
     const leftAmount = numeral(amount).format('0,0');
+    const now = new Date();
+    const currentDate = moment(now).format('YYYY. MM. DD');
     if (slider1ActiveSlide === 0) {
       return (
         <SwiperCardContainer>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'flex-end',
-              marginBottom: 30,
-            }}>
+          <TopIconContainer>
             <TouchableOpacity>
-              <Image
-                style={{
-                  width: 30,
-                  height: 30,
-                  borderRadius: 30,
-                }}
-                source={asset.home}
-              />
+              <TopIcon source={asset.notification} />
             </TouchableOpacity>
-            <TouchableOpacity>
-              <Image
+            <TouchableOpacity onPress={GOF('profile')}>
+              <TopIcon
                 style={{
-                  width: 30,
-                  height: 30,
-                  borderRadius: 30,
                   marginLeft: 20,
                 }}
-                source={asset.home}
+                source={asset.info}
               />
             </TouchableOpacity>
-          </View>
-          <WhiteRegularText>{item.date}</WhiteRegularText>
+          </TopIconContainer>
+          <WhiteRegularText>{currentDate}</WhiteRegularText>
           <WhiteBoldText>{item.title}</WhiteBoldText>
           <View
             style={{
