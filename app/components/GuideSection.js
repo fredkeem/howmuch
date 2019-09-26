@@ -19,8 +19,8 @@ const ItemBubble = styled.TouchableOpacity`
 `;
 
 const ImageContainer = styled.View`
-  width: 60px;
-  height: 60px;
+  width: 50px;
+  height: 50px;
   border-radius: 50px
   background-color: ${POINT_COLOR};
   justify-content: center;
@@ -31,7 +31,7 @@ const GuideSectionItem = ({resource, action}) => (
   <ItemBubble onPress={action}>
     <ImageContainer>
       <Image
-        style={{width: 35, height: 35}}
+        style={{width: 25, height: 25}}
         resizeMode="contain"
         source={resource.image}
       />
