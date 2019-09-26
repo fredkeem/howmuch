@@ -2,7 +2,20 @@ import React from 'react';
 import {TouchableOpacity, Text} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Base from '../Base';
+import {connect} from 'react-redux';
+import type, {User, Config, Routes} from '../../config/type';
 
+type Props = {
+  user: User,
+  configs: Config,
+  routes: Routes,
+};
+
+@connect(state => ({
+  user: state.users.user,
+  configs: state.main.configs,
+  routes: state.routes,
+}))
 export default class Profile extends Base {
   props: Props;
   state: State;

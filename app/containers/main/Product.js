@@ -13,6 +13,8 @@ export default class ProductScene extends Base {
 
   componentDidMount() {
     this.setStatusBlack();
+
+    console.log(this.props);
   }
 
   render() {
@@ -25,7 +27,7 @@ export default class ProductScene extends Base {
             width: width,
             paddingVertical: 30,
           }}>
-          <CategoriesComponent />
+          <CategoriesComponent props={this.props} />
         </ScrollView>
       </View>
     );
