@@ -6,8 +6,10 @@ import {
   Platform,
   ViewPagerAndroid,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import styled from 'styled-components';
+import Camera from '../containers/Camera';
 
 const CategoriesContainer = styled.View`
   width: 100%;
@@ -39,18 +41,24 @@ const CategoriesItems = ({resource, action}) => (
       style={{justifyContent: 'center', alignItems: 'center'}}
       onPress={action}>
       <ImageSection />
+      <Image
+        source={resource.image}
+        style={{width: 50, height: 50, backgroundColor: 'black'}}
+      />
       <Text>{resource.title}</Text>
     </TouchableOpacity>
     <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center'}}>
       <ImageSection />
       <Text>{resource.title}</Text>
     </TouchableOpacity>
+    {/* <Camera /> */}
   </CategoriesItem>
 );
 
 const _renderCategoriesItem = () => (
   <CategoriesItems
     action={GOF('camera')}
+    // action={() => <Camera />}
     resource={{
       title: 'asd',
     }}

@@ -12,11 +12,14 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {Actions} from 'react-native-router-flux';
 import styles from './SigninStyles';
 import SelectOptionButton from '../../../components/button/SelectOptionButton';
-// import {connect} from 'react-redux';
+import {connect} from 'react-redux';
 import {loginUser} from '../../../redux/users.actions';
 // import {saveUserToken} from '../../redux/actions';
 import _ from 'lodash';
 
+@connect(state => ({
+  routes: state.routes,
+}))
 export default class EmailLogin extends Component {
   static navigationOptions = {
     title: 'Please sign in',
@@ -33,7 +36,7 @@ export default class EmailLogin extends Component {
 
   async onPressLoginUser() {
     try {
-      const {error} = await DISPATCH(
+      const {user, error} = await DISPATCH(
         loginUser(this.state.email, this.state.password),
       );
 

@@ -3,10 +3,15 @@ import {TouchableOpacity, View, Text, ScrollView} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import CategoriesComponent from '../../components/Caterogies';
 import Base from '../Base';
+import CameraScene from '../Camera';
 
 export default class ProductScene extends Base {
   constructor(props) {
     super(props);
+
+    this.state = {
+      path: null,
+    };
   }
   props: Props;
   state: State;
@@ -15,6 +20,7 @@ export default class ProductScene extends Base {
     this.setStatusBlack();
 
     console.log(this.props);
+    console.log(this.state);
   }
 
   render() {

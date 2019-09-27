@@ -53,7 +53,7 @@ export default class TextTickerContainer extends Component {
         {searchObject && searchObject.length > 0 && (
           <Text style={{flexDirection: 'row'}}>
             {searchObject.map(item => (
-              <Text style={{fontSize: 12}}>
+              <Text key={item} style={{fontSize: 12}}>
                 iPhone Xs
                 {numeral(item.lprice).format('0, 0')}원{' '}
                 {numeral(item.hprice).format('0,0')}원

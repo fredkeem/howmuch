@@ -1,5 +1,12 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, Text, View, Image, ScrollView} from 'react-native';
+import {
+  TouchableOpacity,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  AppState,
+} from 'react-native';
 // import {Actions} from 'react-native-router-flux';
 // import AsyncStorage from '@react-native-community/async-storage';
 // import Action from '../../redux/actions';
@@ -17,7 +24,7 @@ import SwiperBanner from '../../components/SwiperBanner';
 import TextTicker from '../../components/TextTicker';
 import {BG_COLOR, POINT_COLOR} from '../../config/colors';
 import GuideSection, {GuideSectionItems} from '../../components/GuideSection';
-
+import {connect} from 'react-redux';
 // const Container = styled.View`
 //   padding-top: 40;
 // `;
@@ -31,24 +38,30 @@ const SectionTitle = styled.Text`
 
 type Props = {
   user: User,
-  challengeUser: User,
 };
 type State = {};
 
+@connect(state => ({
+  routes: state.routes,
+  user: state.users.user,
+}))
 export default class HomeScene extends Base {
   constructor(props) {
     super(props);
+
+    this.state = {
+      searchObject: null,
+      // loading: true,
+    };
   }
 
   props: Props;
   state: State;
 
-  state = {
-    searchObject: null,
-    // loading: true,
-  };
-
   async componentDidMount() {
+    console.log(this.state);
+    console.log(this.props);
+    console.log('---------------------------', this.props.user.name);
     const iPad = '아이패드';
     const iPhone = '아이폰XS';
     // try {
@@ -83,7 +96,7 @@ export default class HomeScene extends Base {
   // }
 
   render() {
-    const {searchObject, loading} = this.state;
+    const {loading} = this.state;
     console.log(this.props);
     console.log(loading);
     return loading ? (

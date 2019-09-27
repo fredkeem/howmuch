@@ -55,7 +55,7 @@ const BannerSectionItems = () => (
     <BannerSectionItem
       action={GOF('camera')}
       resource={{
-        image: asset.icon.compouter,
+        image: asset.icon.computer,
         title: '데스크탑',
       }}
     />

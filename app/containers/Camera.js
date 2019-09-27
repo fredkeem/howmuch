@@ -5,13 +5,15 @@ import {
   Text,
   TouchableOpacity,
   View,
+  ImageBackground,
   Image,
   CameraRoll,
   Platform,
   ToastAndroid,
+  Dimensions,
 } from 'react-native';
 import {RNCamera} from 'react-native-camera';
-import asset from '../../config/asset';
+import asset from '../config/asset';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class CameraScene extends Component {
@@ -21,6 +23,7 @@ export default class CameraScene extends Component {
     this.state = {
       type: RNCamera.Constants.Type.back,
       flashMode: RNCamera.Constants.FlashMode.off,
+      path: null,
     };
   }
   componentDidMount() {
@@ -28,41 +31,27 @@ export default class CameraScene extends Component {
   }
 
   takePicture = async () => {
-    if (this.camera) {
-      const options = {quality: 0.5, base64: true};
-      // this.camera.pausePreview();
+    try {
+      if (this.camera) {
+        const options = {
+          quality: 0.5,
+          base64: true,
+          forceUpOrientation: true,
+          fixOrientation: true,
+        };
 
-      const data = await this.camera.takePictureAsync(options).then(data => {
-        ToastAndroid.show(data.uri, ToastAndroid.SHORT);
-        // CameraRoll.saveToCameraRoll(data.base64);
-        console.log(data);
-      });
-      console.log(data.uri);
-      console.log(data.base64);
+        const {uri} = await this.camera.takePictureAsync(options);
+        this.setState({path: uri});
+        console.log('Path to image: ' + uri);
+      }
+      // this.props.updateImage(data.uri);
+    } catch (err) {
+      console.log('err: ', err);
     }
   };
 
-  flipCamera = () => {
-    this.setState({
-      type:
-        this.state.type === RNCamera.Constants.Type.back
-          ? RNCamera.Constants.Type.front
-          : RNCamera.Constants.Type.back,
-    });
-  };
-
-  flashType = () => {
-    this.setState({
-      flashMode:
-        this.state.flashMode === RNCamera.Constants.FlashMode.off
-          ? RNCamera.Constants.FlashMode.torch
-          : RNCamera.Constants.FlashMode.off,
-    });
-  };
-
-  render() {
+  renderCamera() {
     const {type, flashMode} = this.state;
-    // const IOS = Platform.OS === 'ios'
     return (
       <View style={styles.container}>
         <View
@@ -129,6 +118,77 @@ export default class CameraScene extends Component {
             />
           </TouchableOpacity>
         </View>
+      </View>
+    );
+  }
+
+  renderImage() {
+    const {path} = this.state;
+    return (
+      <View
+        style={{
+          flex: 1,
+          justifyContent: 'flex-end',
+          alignItems: 'center',
+          height: Dimensions.get('window').height,
+          width: Dimensions.get('window').width,
+          backgroundColor: 'transparent',
+        }}>
+        <Image
+          source={{uri: path}}
+          style={{
+            flex: 1,
+            justifyContent: 'flex-end',
+            alignItems: 'center',
+            height: Dimensions.get('window').height,
+            width: Dimensions.get('window').width,
+            backgroundColor: 'transparent',
+          }}
+        />
+        <Text
+          style={{color: 'red'}}
+          onPress={() => this.setState({path: null})}>
+          Cancel
+        </Text>
+        <Text
+          style={{color: 'red'}}
+          onPress={() => this.setState({path: null})}>
+          Save
+        </Text>
+      </View>
+    );
+  }
+
+  flipCamera = () => {
+    this.setState({
+      type:
+        this.state.type === RNCamera.Constants.Type.back
+          ? RNCamera.Constants.Type.front
+          : RNCamera.Constants.Type.back,
+    });
+  };
+
+  flashType = () => {
+    this.setState({
+      flashMode:
+        this.state.flashMode === RNCamera.Constants.FlashMode.off
+          ? RNCamera.Constants.FlashMode.torch
+          : RNCamera.Constants.FlashMode.off,
+    });
+  };
+
+  render() {
+    const {type, flashMode} = this.state;
+    // const IOS = Platform.OS === 'ios'
+    return (
+      <View
+        style={{
+          flex: 1,
+          alignItems: 'center',
+          justifyContent: 'center',
+          backgroundColor: '#000',
+        }}>
+        {this.state.path ? this.renderImage() : this.renderCamera()}
       </View>
     );
   }

@@ -29,6 +29,10 @@ export type Group = {
   logo: string,
 };
 
+export type Product = {
+  path: string,
+};
+
 export type ServiceTypes =
   | SERVICE_TYPE.ZIKTO
   | SERVICE_TYPE.FITBIT

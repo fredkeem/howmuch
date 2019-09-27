@@ -24,7 +24,7 @@ import Start from '../containers/main/starts/Start';
 import asset from '../config/asset';
 import ProductRegistration from './ProductRegistration';
 import Tutorial from './information/Tutorials';
-import Camera from './main/Camera';
+import Camera from './Camera';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class TabIcon extends Component {
