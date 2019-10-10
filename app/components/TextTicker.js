@@ -4,14 +4,14 @@ import TextTicker from 'react-native-text-ticker';
 import {object} from '../api';
 import numeral from 'numeral';
 import styled from 'styled-components';
-import {POINT_COLOR} from '../config/colors';
+import {POINT_COLOR, GREY_COLOR} from '../config/colors';
 
 const TickerContainer = styled.View`
   flex: 1;
   padding-vertical: 10;
   justify-content: center;
   align-items: center;
-  background-color: ${POINT_COLOR};
+  background-color: ${GREY_COLOR};
 `;
 
 export default class TextTickerContainer extends Component {
@@ -52,8 +52,8 @@ export default class TextTickerContainer extends Component {
       <>
         {searchObject && searchObject.length > 0 && (
           <Text style={{flexDirection: 'row'}}>
-            {searchObject.map(item => (
-              <Text key={item} style={{fontSize: 12}}>
+            {searchObject.map((item, index) => (
+              <Text key={index} style={{fontSize: 12}}>
                 iPhone Xs
                 {numeral(item.lprice).format('0, 0')}원{' '}
                 {numeral(item.hprice).format('0,0')}원

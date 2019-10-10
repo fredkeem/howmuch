@@ -8,48 +8,149 @@ import {
   Text,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
+import * as Animatable from 'react-native-animatable';
+import userInfo from '../../../api/userInfo';
+import {BG_COLOR, TINT_COLOR, POINT_COLOR} from '../../../config/colors';
+import {phoneNumber, phoneNumberLogin} from '../../../redux/users.actions';
+import _ from 'lodash';
+
+import styled from 'styled-components';
+
+const Label = styled.Text`
+  color: ${TINT_COLOR};
+  font-family: 'SpoqaHanSans-regular;
+  font-size: 12px;
+`;
+
+const LoginButton = styled.TouchableOpacity`
+  background-color: #fff;
+  width: 100%;
+  height: 45px;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  border: 1px solid ${POINT_COLOR}
+  border-radius: 10px;
+`;
+
+const TextInputStyle = styled.TextInput`
+  color: ${POINT_COLOR};
+  width: 100%;
+  border-bottom-color: #fff;
+  border-bottom-width: 1px;
+  padding-vertical: 10px;
+  font-family: 'SpoqaHanSans-bold';
+`;
 
 export default class PhoneLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: '',
-      password: '',
+      phoneNumber: '',
+      code: '',
       errorMessage: '',
     };
   }
 
+  componentDidMount() {
+    // try {
+    //   const accessToken = userInfo.getAccessToken();
+    //   // console.log(accessToken);
+    //   // if (_.isEmpty(accessToken)) {
+    //   //   return GO('phoneLogin');
+    //   // }
+    // } catch (e) {
+    //   console.log(e);
+    // } finally {
+    //   if (userInfo.isUserOk()) {
+    //     GO('home');
+    //   }
+    // }
+  }
+
+  phoneNumberRequest = async () => {
+    try {
+      const {data: user} = await DISPATCH(phoneNumber(this.state.phoneNumber));
+      console.log(this.state.phoneNumber);
+      console.log(user);
+    } catch (e) {
+      console.log(e);
+    } finally {
+      alert(1);
+    }
+  };
+
+  phoneNumberLogin = async () => {
+    try {
+      const r = await DISPATCH(
+        phoneNumberLogin(this.state.phoneNumber, this.state.code),
+      );
+      const user = r.user.data;
+      // console.log('user', user);
+      userInfo.setUser(user);
+      console.log('data', data);
+      if (!_.isEmpty(error)) {
+        return alert(error);
+      }
+    } catch (e) {
+      ERROR(e);
+    } finally {
+      GO('home');
+
+      // alert(1);
+    }
+  };
+
   render() {
     return (
       <KeyboardAvoidingView behavior="padding">
-        <ScrollView keyboardShouldPersistTaps="never" scrollEnabled={false}>
-          <View
+        <ScrollView
+          keyboardShouldPersistTaps="never"
+          scrollEnabled={false}
+          contentContainerStyle={{
+            backgroundColor: `${BG_COLOR}`,
+            height: height,
+            padding: 20,
+          }}>
+          <Animatable.View
+            animation="fadeInUp"
             style={{
+              flex: 1,
               width: '100%',
-              height: '100%',
-              display: 'flex',
               justifyContent: 'center',
-              alignItems: 'center',
-              backgroundColor: 'red',
+              alignItems: 'flex-start',
             }}>
             <Text>{this.state.errorMessage}</Text>
-            <TextInput
-              onChangeText={email => this.setState({email})}
-              value={this.state.email}
-              placeholder="EMAIL ADDRESS"
+            <Label>핸드폰 번호 입력</Label>
+            <TextInputStyle
+              onChangeText={phoneNumber => this.setState({phoneNumber})}
+              value={this.state.phoneNumber}
+              placeholder="- 없이 번호만 입력해주세요."
               autoCapitalize="none"
-              onFocus={() => this.setState({email: ''})}
+              onFocus={() => this.setState({phoneNumber: ''})}
               underlineColorAndroid="#fff"
+              placeholderTextColor={`${POINT_COLOR}`}
+              style={{marginBottom: 40}}
             />
-            <TextInput
-              onChangeText={password => this.setState({password})}
-              value={this.state.password}
-              placeholder="PASSWORD"
+            <TouchableOpacity
+              onPress={this.phoneNumberRequest}
+              style={{position: 'absolute', right: 0, top: 323}}>
+              <Text style={{color: `${TINT_COLOR}`}}>인증번호</Text>
+            </TouchableOpacity>
+            <Label>인증번호 입력</Label>
+            <TextInputStyle
+              onChangeText={code => this.setState({code})}
+              value={this.state.code}
+              placeholder="인증번호를 입력해주세요."
               autoCapitalize="none"
-              onFocus={() => this.setState({password: ''})}
+              onFocus={() => this.setState({code: ''})}
               underlineColorAndroid="#fff"
+              placeholderTextColor={`${POINT_COLOR}`}
             />
-          </View>
+          </Animatable.View>
+          <LoginButton onPress={this.phoneNumberLogin}>
+            <Text style={{color: `${POINT_COLOR}`}}>로그인 하기</Text>
+          </LoginButton>
         </ScrollView>
       </KeyboardAvoidingView>
     );

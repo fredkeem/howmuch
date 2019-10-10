@@ -3,23 +3,46 @@ import {TouchableOpacity, Text, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import SelectOptionButton from '../../../components/button/SelectOptionButton';
 import userInfo from '../../../api/userInfo';
+import Base from '../../../components/BaseHeader';
 import {authUser} from '../../../redux/users.actions';
 import AsyncStorage from '@react-native-community/async-storage';
 // import {connect} from 'react-redux';
 import _ from 'lodash';
 
 export default class Start extends Component {
-  componentDidMount = async () => {
-    const accessToken = await AsyncStorage.getItem('accessToken');
-
-    console.log(accessToken);
-
-    if (!_.isEmpty(accessToken)) {
-      GO('home');
+  componentDidMount() {
+    // const accessToken = await AsyncStorage.getItem('accessToken');
+    try {
+      const accessToken = userInfo.getAccessToken();
+      console.log(accessToken);
+      if (!_.isEmpty(accessToken)) {
+        return GO('phoneLogin');
+      }
+    } catch (e) {
+      console.log(e);
+    } finally {
+      if (userInfo.isUserOk()) {
+        GO('home');
+      }
     }
-  };
+  }
 
-  componentWillMount() {}
+  // componentDidMount() {
+  //   try {
+  //     const accessToken = userInfo.getAccessToken();
+  //     console.log(accessToken);
+  //     if (_.isEmpty(accessToken)) {
+  //       return GO('phoneLogin');
+  //     }
+  //     // if (user) userInfo.setUser(user);
+  //   } catch (e) {
+  //     LOG(e);
+  //   } finally {
+  //     if (userInfo.isUserOk()) {
+  //       GO('home');
+  //     }
+  //   }
+  // }
 
   render() {
     const loginButtonColorOption = {

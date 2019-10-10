@@ -31,6 +31,7 @@ export type Group = {
 
 export type Product = {
   path: string,
+  payload: ?Object,
 };
 
 export type ServiceTypes =

@@ -13,4 +13,7 @@ export default {
     type: [],
     routeName: null,
   },
+  product: {
+    path: null,
+  },
 };

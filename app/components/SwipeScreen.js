@@ -17,21 +17,28 @@ import Carousel, {ParallaxImage, Pagination} from 'react-native-snap-carousel';
 import styled from 'styled-components';
 import layout from '../config/layout';
 import Slider from './Slider';
-
+// import {TintButton} from '../components/button/TintButton';
 import numeral from 'numeral';
 import asset from '../config/asset';
 
 const WhiteRegularText = styled.Text`
   color: ${TINT_COLOR};
   font-family: 'SpoqaHanSans-Regular';
-  font-size: 18px;
+  font-size: 14px;
   letter-spacing: 1;
 `;
 
 const WhiteBoldText = styled.Text`
   color: ${TINT_COLOR};
   font-family: 'SpoqaHanSans-Bold';
-  font-size: 24px;
+  font-size: 18px;
+  letter-spacing: 1;
+`;
+
+const PointBoldText = styled.Text`
+  color: ${POINT_COLOR};
+  font-family: 'SpoqaHanSans-Bold';
+  font-size: 18px;
   letter-spacing: 1;
 `;
 
@@ -48,11 +55,11 @@ const SwiperCardContainer = styled.View`
   background-color: ${BG_COLOR};
 `;
 
-const TopIconContainer = styled.View`
-  flex-direction: row;
-  justify-content: flex-end;
-  margin-bottom: 30px;
-`;
+// const TopIconContainer = styled.View`
+//   flex-direction: row;
+//   justify-content: flex-end;
+//   margin-bottom: 30px;
+// `;
 
 const TopIcon = styled.Image`
   width: 25px;
@@ -72,13 +79,18 @@ export default class SwiperComponent extends Component {
       swiperBanner: [
         {
           date: '2019. 09. 17',
-          title: '오늘의 담보 대출 금액',
+          title: '담보 대출 금액',
+          total: 300000000,
         },
       ],
       slider1ActiveSlide: 0,
     };
   }
   componentDidMount() {}
+
+  requestLoan() {
+    alert(1);
+  }
 
   _renderSwiperCardContainer = ({item, index}) => {
     const {slider1ActiveSlide, amount} = this.state;
@@ -88,48 +100,43 @@ export default class SwiperComponent extends Component {
     if (slider1ActiveSlide === 0) {
       return (
         <SwiperCardContainer>
-          <TopIconContainer>
-            <TouchableOpacity>
-              <TopIcon source={asset.notification} />
-            </TouchableOpacity>
-            <TouchableOpacity onPress={GOF('profile')}>
-              <TopIcon
-                style={{
-                  marginLeft: 20,
-                }}
-                source={asset.info}
-              />
-            </TouchableOpacity>
-          </TopIconContainer>
-          <WhiteRegularText>{currentDate}</WhiteRegularText>
-          <WhiteBoldText>{item.title}</WhiteBoldText>
-          <View
-            style={{
-              justifyContent: 'space-between',
-              flexDirection: 'row',
-              alignItems: 'center',
-              marginVertical: 30,
-            }}>
+          <WhiteRegularText>
+            {currentDate} {item.title}
+          </WhiteRegularText>
+          <PointBoldText>{numeral(item.total).format('0,0')} 원</PointBoldText>
+          <View>
+            <View style={{marginTop: 40, marginBottom: 20}}>
+              <WhiteBoldText>오늘의 잔여 대출 가능액</WhiteBoldText>
+            </View>
             <View
               style={{
-                width: 36,
-                height: 36,
-                borderRadius: 50,
-                backgroundColor: `${POINT_COLOR}`,
-              }}
-            />
-            <NumberTicker
-              number={leftAmount}
-              duration={3000}
-              textStyle={{
-                fontFamily: 'SpoqaHanSans-Bold',
-                color: `${POINT_COLOR}`,
-                letterSpacing: 2,
-                lineHeight: 53,
-              }}
-            />
+                justifyContent: 'flex-start',
+                flexDirection: 'row',
+                alignItems: 'center',
+              }}>
+              <View
+                style={{
+                  width: 36,
+                  height: 36,
+                  marginRight: 16,
+                  borderRadius: 50,
+                  backgroundColor: `${POINT_COLOR}`,
+                }}
+              />
+              <NumberTicker
+                number={leftAmount}
+                duration={3000}
+                textStyle={{
+                  fontFamily: 'SpoqaHanSans-Bold',
+                  color: `${POINT_COLOR}`,
+                  letterSpacing: 2,
+                  lineHeight: 53,
+                }}
+              />
+            </View>
           </View>
           <Slider />
+          {/* <TintButton action={() => alert(1)} /> */}
         </SwiperCardContainer>
       );
     } else {

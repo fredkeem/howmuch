@@ -18,6 +18,8 @@ const WhiteText = styled.Text`
 const PointText = styled.Text`
   color: ${POINT_COLOR};
   font-size: 16px;
+  position: absolute;
+  top: -28px;
 `;
 
 export default class SliderComponent extends Component {
@@ -32,6 +34,9 @@ export default class SliderComponent extends Component {
   render() {
     return (
       <Container>
+        <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
+          <PointText>40 %</PointText>
+        </View>
         <Slider
           maximumValue={100}
           maximumTrackTintColor={`${TINT_COLOR}`}
@@ -51,10 +56,6 @@ export default class SliderComponent extends Component {
           onValueChange={sliderValue => this.setState({sliderValue})}
           disabled
         />
-        <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-          <PointText>40 %</PointText>
-          <WhiteText>asd</WhiteText>
-        </View>
       </Container>
     );
   }

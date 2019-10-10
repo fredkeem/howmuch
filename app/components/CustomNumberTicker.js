@@ -2,19 +2,19 @@ import React, {Component} from 'react';
 import {Animated, Easing, StyleSheet, Text, View} from 'react-native';
 import PropTypes from 'prop-types';
 
-const NumberTicker = ({style, textSize = 40, textStyle, number, duration}) => {
+const NumberTicker = ({style, textSize = 34, textStyle, number, duration}) => {
   const mapToDigits = () => {
-    return (number + '').split('').map(data => {
+    return (number + '').split('').map((data, index) => {
       if (data === '.' || data === ',') {
         return (
-          <Text key={data} style={[textStyle, {fontSize: textSize}]}>
+          <Text key={index} style={[textStyle, {fontSize: textSize}]}>
             {data}
           </Text>
         );
       }
       return (
         <TextTicker
-          key={data}
+          key={index}
           textSize={textSize}
           textStyle={textStyle}
           targetNumber={parseFloat(data, 10)}
@@ -132,7 +132,7 @@ const generateStyles = textSize =>
   StyleSheet.create({
     container: {
       width: textSize * 0.62,
-      height: textSize * 1.1,
+      height: textSize * 1.2,
       overflow: 'hidden',
       alignItems: 'center',
       justifyContent: 'flex-end',

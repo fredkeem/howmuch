@@ -88,6 +88,18 @@ project.ext.vectoricons = [
 
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
+// onesignal
+// buildscript {
+//     repositories {
+//         maven { url 'https://plugins.gradle.org/m2/' } // Gradle Plugin Portal 
+//     }
+//     dependencies {
+//         classpath 'gradle.plugin.com.onesignal:onesignal-gradle-plugin:[0.12.1, 0.99.99]'
+//     }
+// }
+
+// apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
+// onesignal
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices

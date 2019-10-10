@@ -17,6 +17,7 @@ export default {
   setUser: async user => {
     try {
       this.user = user;
+      console.log(this.user);
       this.accessToken = user.accessToken;
       await AsyncStorage.setItem('accessToken', user.accessToken);
     } catch (e) {
@@ -25,8 +26,9 @@ export default {
     }
   },
   getUser: () => this.user,
-  isUserOk: (): boolean =>
-    this.accessToken && this.user && !isEmpty(this.user.services),
+  // isUserOk: (): boolean =>
+  //   this.accessToken && this.user && !isEmpty(this.user.services),
+  isUserOk: (): boolean => this.accessToken,
   getAccessToken: () => this.accessToken,
   isChecked: (key: string): boolean => this.checkList[key] === 'true',
   check: async (key: string) => {

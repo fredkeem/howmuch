@@ -7,14 +7,7 @@ import {
   ScrollView,
   AppState,
 } from 'react-native';
-// import {Actions} from 'react-native-router-flux';
-// import AsyncStorage from '@react-native-community/async-storage';
-// import Action from '../../redux/actions';
-// import {connect} from 'react-redux';
 import {Home, Game, User, ActivityType} from '../../config/type';
-// import {object} from '../../api';
-// import {removeUserToken} from '../../redux/users.actions';
-// import user from '../../api/userInfo';
 import Loader from '../../components/Loader';
 import Base from '../Base';
 import asset from '../../config/asset';
@@ -24,7 +17,9 @@ import SwiperBanner from '../../components/SwiperBanner';
 import TextTicker from '../../components/TextTicker';
 import {BG_COLOR, POINT_COLOR} from '../../config/colors';
 import GuideSection, {GuideSectionItems} from '../../components/GuideSection';
+import AsyncStorage from '@react-native-community/async-storage';
 import {connect} from 'react-redux';
+import {InprocessContainer} from '../../components/MyList';
 // const Container = styled.View`
 //   padding-top: 40;
 // `;
@@ -36,10 +31,10 @@ const SectionTitle = styled.Text`
   letter-spacing: 1;
 `;
 
-type Props = {
-  user: User,
-};
-type State = {};
+// type Props = {
+//   user: User,
+// };
+// type State = {};
 
 @connect(state => ({
   routes: state.routes,
@@ -50,7 +45,7 @@ export default class HomeScene extends Base {
     super(props);
 
     this.state = {
-      searchObject: null,
+      // searchObject: null,
       // loading: true,
     };
   }
@@ -59,9 +54,12 @@ export default class HomeScene extends Base {
   state: State;
 
   async componentDidMount() {
-    console.log(this.state);
+    // console.log(this.state);
+    // console.log(this.props);
+    // console.log('---------------------------', this.props.user.name);
+    const r = await AsyncStorage.getAllKeys();
+    console.log(r);
     console.log(this.props);
-    console.log('---------------------------', this.props.user.name);
     const iPad = '아이패드';
     const iPhone = '아이폰XS';
     // try {
@@ -97,8 +95,8 @@ export default class HomeScene extends Base {
 
   render() {
     const {loading} = this.state;
-    console.log(this.props);
-    console.log(loading);
+    // console.log(this.props);
+    // console.log(loading);
     return loading ? (
       <Loader />
     ) : (
@@ -114,8 +112,14 @@ export default class HomeScene extends Base {
           <GuideSection />
         </View>
         <View style={{margin: 20, marginRight: 0}}>
-          <SectionTitle>얼마야 혜택</SectionTitle>
+          <SectionTitle>이벤트</SectionTitle>
           <SwiperBanner />
+        </View>
+        <View style={{margin: 20}}>
+          <SectionTitle>나의 상품</SectionTitle>
+          {/* <InprocessContainer />
+          <InprocessContainer />
+          <InprocessContainer /> */}
         </View>
         <View />
         {/* {this.state.searchObject && this.state.searchObject.length > 0 && (

@@ -14,14 +14,14 @@ import asset from '../config/asset';
 const ItemBubble = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
-  margin-top: 10px;
-  margin-right: 25px;
+  margin-top: 20px;
+  margin-right: 32px;
 `;
 
 const ImageContainer = styled.View`
-  width: 50px;
-  height: 50px;
-  border-radius: 50px
+  width: 60px;
+  height: 60px;
+  border-radius: 60px
   background-color: ${POINT_COLOR};
   justify-content: center;
   align-items: center;
@@ -31,7 +31,7 @@ const GuideSectionItem = ({resource, action}) => (
   <ItemBubble onPress={action}>
     <ImageContainer>
       <Image
-        style={{width: 25, height: 25}}
+        style={{width: 33, height: 33}}
         resizeMode="contain"
         source={resource.image}
       />
@@ -115,8 +115,8 @@ export default class GuideSection extends Component {
         <GuideSectionItem
           action={this.onPressGuideComputer}
           resource={{
-            image: asset.icon.computer,
-            title: '데스크탑',
+            image: asset.icon.camera,
+            title: '카메라',
           }}
         />
         <GuideSectionItem

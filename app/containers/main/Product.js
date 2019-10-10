@@ -4,13 +4,17 @@ import {Actions} from 'react-native-router-flux';
 import CategoriesComponent from '../../components/Caterogies';
 import Base from '../Base';
 import CameraScene from '../Camera';
+import {connect} from 'react-redux';
 
+@connect(state => ({
+  productRegistration: state.productRegistration,
+}))
 export default class ProductScene extends Base {
   constructor(props) {
     super(props);
 
     this.state = {
-      path: null,
+      path: props.productRegistration.path,
     };
   }
   props: Props;
@@ -18,9 +22,8 @@ export default class ProductScene extends Base {
 
   componentDidMount() {
     this.setStatusBlack();
-
-    console.log(this.props);
-    console.log(this.state);
+    // console.log(this.props);
+    // console.log(this.state);
   }
 
   render() {

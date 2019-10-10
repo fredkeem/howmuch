@@ -12,5 +12,6 @@ export default {
     laptop: require('../assets/image/product_icon/laptop.png'),
     bag: require('../assets/image/product_icon/bag.png'),
     watch: require('../assets/image/product_icon/watch.png'),
+    camera: require('../assets/image/product_icon/camera.png'),
   },
 };

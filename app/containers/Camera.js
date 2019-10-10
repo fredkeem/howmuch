@@ -16,6 +16,15 @@ import {RNCamera} from 'react-native-camera';
 import asset from '../config/asset';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+import reducer from '../redux/reducer';
+import {connect} from 'react-redux';
+import Action from '../redux/actions';
+import {Actions} from 'react-native-router-flux';
+import {POINT_COLOR, TINT_COLOR} from '../config/colors';
+
+@connect(state => ({
+  productRegistration: state.productRegistration,
+}))
 export default class CameraScene extends Component {
   constructor(props) {
     super(props);
@@ -23,12 +32,10 @@ export default class CameraScene extends Component {
     this.state = {
       type: RNCamera.Constants.Type.back,
       flashMode: RNCamera.Constants.FlashMode.off,
-      path: null,
+      path: props.productRegistration.path,
     };
   }
-  componentDidMount() {
-    console.log(this.state);
-  }
+  componentDidMount() {}
 
   takePicture = async () => {
     try {
@@ -41,12 +48,17 @@ export default class CameraScene extends Component {
         };
 
         const {uri} = await this.camera.takePictureAsync(options);
-        this.setState({path: uri});
         console.log('Path to image: ' + uri);
+        // this.setState({path: uri});
+        // await DISPATCH({type: Action.SAVE_PHOTO, key: 'main1', payload: uri});
+        await DISPATCH({type: Action.SAVE_PHOTO, payload: uri});
+        console.log(this.props);
       }
+      // console.log(this.props);
       // this.props.updateImage(data.uri);
     } catch (err) {
       console.log('err: ', err);
+    } finally {
     }
   };
 
@@ -54,7 +66,7 @@ export default class CameraScene extends Component {
     const {type, flashMode} = this.state;
     return (
       <View style={styles.container}>
-        <View
+        {/* <View
           style={{
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -82,7 +94,7 @@ export default class CameraScene extends Component {
               color="white"
             />
           </TouchableOpacity>
-        </View>
+        </View> */}
         <RNCamera
           ref={ref => {
             this.camera = ref;
@@ -103,27 +115,57 @@ export default class CameraScene extends Component {
             buttonNegative: 'Cancel',
           }}
           onGoogleVisionBarcodesDetected={({barcodes}) => {
-            console.log(barcodes);
+            // console.log(barcodes);
           }}
-          capture={false}
-        />
-        <View style={{flex: 0, flexDirection: 'row', justifyContent: 'center'}}>
-          <TouchableOpacity
-            onPress={this.takePicture.bind(this)}
-            style={styles.capture}>
-            <Image
-              style={{width: 30, height: 30}}
-              resizeMode="contain"
-              source={asset.logo}
-            />
-          </TouchableOpacity>
-        </View>
+          capture={false}>
+          <View
+            style={{
+              // flex: 0,
+              width: width,
+              flexDirection: 'row',
+              justifyContent: 'space-around',
+              alignItems: 'center',
+              backgroundColor: 'rgba(0,0,0,0.6)',
+            }}>
+            <TouchableOpacity style={styles.capture1} onPress={this.flashType}>
+              <Icon
+                name={
+                  flashMode === RNCamera.Constants.FlashMode.torch
+                    ? IOS
+                      ? 'ios-flash'
+                      : 'md-flash'
+                    : IOS
+                    ? 'ios-flash-off'
+                    : 'md-flash-off'
+                }
+                size={25}
+                color="white"
+              />
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={this.takePicture.bind(this)}
+              style={styles.capture}>
+              <Icon
+                name={IOS ? 'ios-camera' : 'md-camera'}
+                size={45}
+                color={`${POINT_COLOR}`}
+              />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => POP()} style={styles.capture1}>
+              <Icon
+                name={IOS ? 'ios-close' : 'md-close'}
+                size={25}
+                color={`${TINT_COLOR}`}
+              />
+            </TouchableOpacity>
+          </View>
+        </RNCamera>
       </View>
     );
   }
 
   renderImage() {
-    const {path} = this.state;
+    const path = this.props.productRegistration.path;
     return (
       <View
         style={{
@@ -134,27 +176,59 @@ export default class CameraScene extends Component {
           width: Dimensions.get('window').width,
           backgroundColor: 'transparent',
         }}>
-        <Image
+        <ImageBackground
           source={{uri: path}}
           style={{
             flex: 1,
             justifyContent: 'flex-end',
             alignItems: 'center',
-            height: Dimensions.get('window').height,
-            width: Dimensions.get('window').width,
+            height: height,
+            width: width,
             backgroundColor: 'transparent',
-          }}
-        />
-        <Text
-          style={{color: 'red'}}
-          onPress={() => this.setState({path: null})}>
-          Cancel
-        </Text>
-        <Text
-          style={{color: 'red'}}
-          onPress={() => this.setState({path: null})}>
-          Save
-        </Text>
+          }}>
+          <View
+            style={{
+              width: width,
+              backgroundColor: 'rgba(0,0,0,0.6)',
+              paddingTop: 20,
+              paddingBottom: 30,
+              paddingHorizontal: 30,
+            }}>
+            <Text style={{color: 'white'}}>상품을 업로드 하시겠습니까?</Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                marginTop: 66,
+              }}>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'SpoqaHanSans-Bold',
+                  backgroundColor: `${POINT_COLOR}`,
+                  paddingVertical: 15,
+                  paddingHorizontal: 50,
+                  borderRadius: 5,
+                }}
+                onPress={this.cancelPhoto}>
+                재촬영
+              </Text>
+              <Text
+                style={{
+                  color: 'white',
+                  fontFamily: 'SpoqaHanSans-Bold',
+                  backgroundColor: `${POINT_COLOR}`,
+                  paddingVertical: 15,
+                  paddingHorizontal: 50,
+                  borderRadius: 5,
+                }}
+                onPress={this.savePhoto}>
+                업로드
+              </Text>
+            </View>
+          </View>
+        </ImageBackground>
       </View>
     );
   }
@@ -177,8 +251,24 @@ export default class CameraScene extends Component {
     });
   };
 
+  savePhoto = () => {
+    // this.props.productRegistration.path = this.state.path;
+    // this.state.path
+    // this.setState({})
+    // await DISPATCH({type: Action.SAVE_PHOTO, payload: uri});
+    console.log(this.props, 'save');
+    Actions.popTo('product');
+  };
+
+  cancelPhoto = async () => {
+    await DISPATCH({type: Action.SAVE_PHOTO, payload: null});
+    // this.props.productRegistration.path = null;
+    console.log(this.props, 'cancel');
+  };
+
   render() {
     const {type, flashMode} = this.state;
+    const path = this.props.productRegistration.path;
     // const IOS = Platform.OS === 'ios'
     return (
       <View
@@ -186,9 +276,9 @@ export default class CameraScene extends Component {
           flex: 1,
           alignItems: 'center',
           justifyContent: 'center',
-          backgroundColor: '#000',
+          backgroundColor: 'tranparent',
         }}>
-        {this.state.path ? this.renderImage() : this.renderCamera()}
+        {path ? this.renderImage() : this.renderCamera()}
       </View>
     );
   }
@@ -196,10 +286,12 @@ export default class CameraScene extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    // flex: 1,
+    width: width,
+    height: height,
     flexDirection: 'column',
-    backgroundColor: 'black',
-    padding: 20,
+    // backgroundColor: 'black',
+    // padding: 20,
   },
   preview: {
     flex: 1,
@@ -207,12 +299,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   capture: {
-    flex: 0,
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    padding: 15,
-    paddingHorizontal: 20,
-    alignSelf: 'center',
-    margin: 20,
+    width: 94,
+    height: 94,
+    borderWidth: 3,
+    borderRadius: 94,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: `${POINT_COLOR}`,
+    marginVertical: 30,
+  },
+  capture1: {
+    width: 40,
+    height: 40,
+    borderWidth: 1,
+    borderRadius: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: `${TINT_COLOR}`,
   },
 });
