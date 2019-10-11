@@ -14,9 +14,6 @@ import global from './app/config/global';
 import Router from './app/containers/Router';
 import user from './app/api/userInfo';
 import Loader from './app/components/Loader';
-// import OneSignal from 'react-native-onesignal';
-
-// OneSignal.init('80461537-0fec-410a-8931-ba7c64ecfd27');
 
 type Props = {
   startTime: number,

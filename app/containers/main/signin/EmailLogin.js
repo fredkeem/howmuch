@@ -17,9 +17,9 @@ import {loginUser} from '../../../redux/users.actions';
 // import {saveUserToken} from '../../redux/actions';
 import _ from 'lodash';
 
-@connect(state => ({
-  routes: state.routes,
-}))
+// @connect(state => ({
+//   routes: state.routes,
+// }))
 export default class EmailLogin extends Component {
   static navigationOptions = {
     title: 'Please sign in',

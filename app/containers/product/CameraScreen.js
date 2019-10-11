@@ -13,14 +13,14 @@ import {
   Dimensions,
 } from 'react-native';
 import {RNCamera} from 'react-native-camera';
-import asset from '../config/asset';
+import asset from '../../config/asset';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-import reducer from '../redux/reducer';
+import reducer from '../../redux/reducer';
 import {connect} from 'react-redux';
-import Action from '../redux/actions';
+import Action from '../../redux/actions';
 import {Actions} from 'react-native-router-flux';
-import {POINT_COLOR, TINT_COLOR} from '../config/colors';
+import {POINT_COLOR, TINT_COLOR} from '../../config/colors';
 
 @connect(state => ({
   productRegistration: state.productRegistration,
@@ -257,7 +257,7 @@ export default class CameraScene extends Component {
     // this.setState({})
     // await DISPATCH({type: Action.SAVE_PHOTO, payload: uri});
     console.log(this.props, 'save');
-    Actions.popTo('product');
+    POP();
   };
 
   cancelPhoto = async () => {

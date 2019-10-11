@@ -12,11 +12,11 @@ type Props = {
   routes: Routes,
 };
 
-@connect(state => ({
-  user: state.users.user,
-  configs: state.main.configs,
-  routes: state.routes,
-}))
+// @connect(state => ({
+//   user: state.users.user,
+//   configs: state.main.configs,
+//   routes: state.routes,
+// }))
 export default class Profile extends Base {
   props: Props;
   state: State;

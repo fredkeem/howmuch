@@ -6,15 +6,15 @@ import Base from '../Base';
 // import CameraScene from '../CameraScreen';
 import {connect} from 'react-redux';
 
-@connect(state => ({
-  productRegistration: state.productRegistration,
-}))
+// @connect(state => ({
+//   productRegistration: state.productRegistration,
+// }))
 export default class ProductScene extends Base {
   constructor(props) {
     super(props);
 
     this.state = {
-      path: props.productRegistration.path,
+      // path: props.productRegistration.path,
     };
   }
   props: Props;
@@ -32,7 +32,7 @@ export default class ProductScene extends Base {
         <ScrollView
           contentContainerStyle={{
             // backgroundColor: 'red',
-            height: height - 60,
+            // height: height - 60,
             width: width,
             // paddingVertical: 30,
           }}>

@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import styled from 'styled-components';
 import asset from '../config/asset';
 import CONST from '../config/const';
+import IconAnt from 'react-native-vector-icons/AntDesign';
 
 type Props = {
   title: ?string,
@@ -35,7 +36,7 @@ const HeadNavigationLeft = styled.View`
   flex: 0.2;
   justify-content: center;
   align-items: flex-start;
-  padding-left: 15px;
+  padding-left: 25px;
   background-color: transparent;
 `;
 
@@ -54,7 +55,7 @@ const HeadNavigationRight = styled.View`
   flex: 0.2;
   justify-content: center;
   align-items: flex-end;
-  padding-right: 15px;
+  padding-right: 25px;
 `;
 
 const HeadNavigationRightTouch = styled.View`
@@ -105,14 +106,23 @@ export default class BaseHeader extends Component {
           {this.props.showBackBtn && (
             <TouchableOpacity onPress={this.onPressBack.bind(this)}>
               <HeadNavigationLeftTouch>
-                <Image
+                {this.props.closed ? (
+                  <IconAnt
+                    name={'left'}
+                    size={25}
+                    color={this.props.tintColor}
+                  />
+                ) : (
+                  <IconAnt name={'right'} size={25} />
+                )}
+                {/* <Image
                   source={this.props.closed ? asset.logo : asset.logo}
                   style={{
                     width: 20,
                     height: 20,
                     tintColor: this.props.titleColor,
                   }}
-                />
+                /> */}
               </HeadNavigationLeftTouch>
             </TouchableOpacity>
           )}

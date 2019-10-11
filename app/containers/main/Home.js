@@ -36,10 +36,10 @@ const SectionTitle = styled.Text`
 // };
 // type State = {};
 
-@connect(state => ({
-  routes: state.routes,
-  user: state.users.user,
-}))
+// @connect(state => ({
+//   routes: state.routes,
+//   user: state.users.user,
+// }))
 export default class HomeScene extends Base {
   constructor(props) {
     super(props);
