@@ -10,10 +10,10 @@ import AsyncStorage from '@react-native-community/async-storage';
 import _ from 'lodash';
 
 export default class Start extends Component {
-  componentDidMount() {
-    // const accessToken = await AsyncStorage.getItem('accessToken');
+  async componentDidMount() {
     try {
-      const accessToken = userInfo.getAccessToken();
+      const accessToken = await AsyncStorage.getItem('accessToken');
+      // const accessToken = userInfo.getAccessToken();
       console.log(accessToken);
       if (!_.isEmpty(accessToken)) {
         return GO('phoneLogin');

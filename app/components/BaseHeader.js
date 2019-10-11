@@ -21,13 +21,14 @@ type Props = {
 };
 
 const HeadNavigationBox = styled.View`
-  height: ${CONST.NAVIGATION_HEIGHT};
-  background-color: transparent;
+  margin-top: 40px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  padding-top: ${CONST.TOP};
   padding-bottom: 10px;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const HeadNavigationLeft = styled.View`
@@ -39,15 +40,12 @@ const HeadNavigationLeft = styled.View`
 `;
 
 const HeadNavigationLeftTouch = styled.View`
-  height: ${CONST.NAVIGATION_HEIGHT - CONST.TOP};
-  width: 100px;
+  width: 50px;
   justify-content: center;
   align-items: flex-start;
 `;
 
 const HeadNavigationText = styled.Text`
-  height: ${CONST.NAVIGATION_HEIGHT - CONST.TOP};
-  width: 100px;
   justify-content: center;
   align-items: flex-start;
 `;
@@ -60,11 +58,12 @@ const HeadNavigationRight = styled.View`
 `;
 
 const HeadNavigationRightTouch = styled.View`
-  height: ${CONST.NAVIGATION_HEIGHT - CONST.TOP};
-  width: 100px;
+  width: 50px;
   justify-content: center;
   align-items: flex-end;
 `;
+
+// height : ${CONST.NAVIGATION_HEIGHT + CONST.TOP};
 
 export default class BaseHeader extends Component {
   props: Props;
@@ -77,7 +76,7 @@ export default class BaseHeader extends Component {
     closed: false,
     style: {},
     leftStyle: {},
-    centerStyle: {},
+    centerStyle: {fontFamily: 'SpoqaHanSans-bold'},
     rightStyle: {},
     LeftComponent: null,
     RightComponent: null,
@@ -101,8 +100,8 @@ export default class BaseHeader extends Component {
 
   render() {
     return (
-      <HeadNavigationBox>
-        <HeadNavigationLeft>
+      <HeadNavigationBox style={this.props.style}>
+        <HeadNavigationLeft style={this.props.leftStyle}>
           {this.props.showBackBtn && (
             <TouchableOpacity onPress={this.onPressBack.bind(this)}>
               <HeadNavigationLeftTouch>
@@ -117,20 +116,23 @@ export default class BaseHeader extends Component {
               </HeadNavigationLeftTouch>
             </TouchableOpacity>
           )}
-          {/* {this.props.LeftComponent && (
+          {this.props.LeftComponent && (
             <TouchableOpacity onPress={this.onPressLeft.bind(this)}>
-              <View style={style.headNavigationLeftTouch}>
+              <HeadNavigationLeftTouch>
                 {this.props.LeftComponent}
-              </View>
+              </HeadNavigationLeftTouch>
             </TouchableOpacity>
-          )} */}
+          )}
         </HeadNavigationLeft>
         <HeadNavigationText
-          // style={[
-          //   style.headNavigationText,
-          //   this.props.centerStyle,
-          //   {color: this.props.titleColor},
-          // ]}
+          style={
+            (this.props.centerStyle,
+            {
+              color: this.props.titleColor,
+              fontFamily: 'SpoqaHanSans-bold',
+              fontSize: 16,
+            })
+          }
           ellipsizeMode="tail"
           numberOfLines={1}>
           {this.props.title.replace('\n', ' ')}

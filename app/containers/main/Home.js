@@ -117,9 +117,9 @@ export default class HomeScene extends Base {
         </View>
         <View style={{margin: 20}}>
           <SectionTitle>나의 상품</SectionTitle>
-          {/* <InprocessContainer />
           <InprocessContainer />
-          <InprocessContainer /> */}
+          <InprocessContainer />
+          <InprocessContainer />
         </View>
         <View />
         {/* {this.state.searchObject && this.state.searchObject.length > 0 && (

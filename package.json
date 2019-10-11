@@ -9,11 +9,6 @@
     "test": "jest",
     "lint": "eslint ."
   },
-  "rnpm": {
-    "assets": [
-      "./assets/fonts/"
-    ]
-  },
   "dependencies": {
     "@babel/plugin-transform-for-of": "^7.4.4",
     "@react-native-community/async-storage": "^1.6.1",

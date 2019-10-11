@@ -24,7 +24,8 @@ import Start from '../containers/main/starts/Start';
 import asset from '../config/asset';
 import ProductRegistration from './ProductRegistration';
 import Tutorial from './information/Tutorials';
-import Camera from './Camera';
+import CameraScreen from './CameraScreen';
+import PictureSaveScreen from './PictureSaveScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class TabIcon extends Component {
@@ -37,9 +38,9 @@ class TabIcon extends Component {
   render() {
     const images = {
       home: asset.home,
-      blue: asset.logo,
+      // blue: asset.logo,
       product: asset.logo,
-      green: asset.logo,
+      // green: asset.logo,
       profile: asset.my_page,
     };
 
@@ -112,7 +113,11 @@ export default class AppRouter extends Component {
                   component={ProductRegistration}
                 />
                 <Scene key={'tutorial'} component={Tutorial} />
-                <Scene key={'camera'} component={Camera} />
+                <Scene key={'cameraScreen'} component={CameraScreen} />
+                <Scene
+                  key={'pictureSaveScreen'}
+                  component={PictureSaveScreen}
+                />
                 <Tabs
                   key="tabsContainer"
                   showLabel={false}
@@ -137,30 +142,30 @@ export default class AppRouter extends Component {
                     hideNavBar
                     title="Home"
                   />
-                  <Scene
+                  {/* <Scene
                     name="blue"
                     key="blue"
                     component={Blue}
                     icon={TabIcon}
                     hideNavBar
                     title="Blue"
-                  />
+                  /> */}
                   <Scene
                     name="product"
                     key="product"
                     component={Product}
                     icon={TabIcon}
-                    hideNavBar
+                    hideNavBar={true}
                     title="Product"
                   />
-                  <Scene
+                  {/* <Scene
                     name="green"
                     key="green"
                     component={Green}
                     icon={TabIcon}
                     hideNavBar
                     title="Green"
-                  />
+                  /> */}
                   <Scene
                     name="profile"
                     key="profile"

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {TouchableOpacity, View, Text, ScrollView} from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import CategoriesComponent from '../../components/Caterogies';
+import CategoriesComponent from '../../components/Categories/Caterogies';
 import Base from '../Base';
-import CameraScene from '../Camera';
+// import CameraScene from '../CameraScreen';
 import {connect} from 'react-redux';
 
 @connect(state => ({
@@ -34,7 +34,7 @@ export default class ProductScene extends Base {
             // backgroundColor: 'red',
             height: height - 60,
             width: width,
-            paddingVertical: 30,
+            // paddingVertical: 30,
           }}>
           <CategoriesComponent props={this.props} />
         </ScrollView>

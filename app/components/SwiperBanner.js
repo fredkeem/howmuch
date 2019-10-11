@@ -46,35 +46,35 @@ const BannerSectionItem = ({resource, action}) => (
 const BannerSectionItems = () => (
   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
     <BannerSectionItem
-      action={GOF('camera')}
+      action={GOF('cameraScreen')}
       resource={{
         image: asset.icon.laptop,
         title: '노트북',
       }}
     />
     <BannerSectionItem
-      action={GOF('camera')}
+      action={GOF('cameraScreen')}
       resource={{
         image: asset.icon.computer,
         title: '데스크탑',
       }}
     />
     <BannerSectionItem
-      action={GOF('camera')}
+      action={GOF('cameraScreen')}
       resource={{
         image: asset.icon.bag,
         title: '가방',
       }}
     />
     <BannerSectionItem
-      action={GOF('camera')}
+      action={GOF('cameraScreen')}
       resource={{
         image: asset.icon.watch,
         title: '시계',
       }}
     />
     <BannerSectionItem
-      action={GOF('camera')}
+      action={GOF('cameraScreen')}
       resource={{
         image: asset.icon.watch,
         title: '아이폰',

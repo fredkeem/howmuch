@@ -7,7 +7,7 @@ import {
   BackHandler,
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
-import CategoriesComponent from '../../components/Caterogies';
+import CategoriesComponent from '../../components/Categories/Caterogies';
 import Base from '../Base';
 import BaseHeader from '../../components/BaseHeader';
 

@@ -9,12 +9,15 @@ import {
   Image,
 } from 'react-native';
 import styled from 'styled-components';
-import Camera from '../containers/Camera';
+import Camera from '../../containers/CameraScreen';
 import _ from 'lodash';
 import {connect} from 'react-redux';
-import asset from '../config/asset';
-import {savePhoto} from '../redux/main.action';
+import asset from '../../config/asset';
+import {savePhoto} from '../../redux/main.action';
 import {Actions} from 'react-native-router-flux';
+import Base from '../../containers/Base';
+import BaseHeader from '../BaseHeader';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 const CategoriesContainer = styled.View`
   width: 100%;
@@ -37,6 +40,34 @@ const ImageSection = styled.View`
   background-color: red;
   border-radius: 70px;
   margin-bottom: 10px;
+`;
+
+const CategoriesItemTouch = styled.TouchableOpacity`
+  margin-bottom: 30px;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const JustifyCenter = styled.View`
+  flex-direction: row;
+  justify-content: center;
+`;
+
+const ItemTouchImage = styled.Image`
+  width: 35px;
+  height: 35px;
+  margin-right: 30px;
+`;
+
+const ItemText = styled.Text`
+  font-family: 'SpoqaHanSans-regular';
+  font-size: 22px;
+`;
+
+const ArrowImage = styled.Image`
+  width: 8px;
+  height: 16px;
 `;
 
 // const CategoriesItems = ({resource, action, props}) => {
@@ -96,10 +127,26 @@ const ImageSection = styled.View`
 //   );
 // };
 
+const RegisterItemCategories = ({resource, action}) => {
+  return (
+    <View style={{marginTop: 14}}>
+      <CategoriesItemTouch onPress={action}>
+        <JustifyCenter>
+          <ItemTouchImage source={resource.image} resizeMode="contain" />
+          <ItemText>{resource.text}</ItemText>
+        </JustifyCenter>
+        <Icon name={'keyboard-arrow-right'} size={30} />
+
+        {/* <ArrowImage source={asset.home} /> */}
+      </CategoriesItemTouch>
+    </View>
+  );
+};
+
 @connect(state => ({
   productRegistration: state.productRegistration,
 }))
-export default class CategoriesComponent extends Component {
+export default class CategoriesComponent extends Base {
   constructor(props) {
     super(props);
 
@@ -118,34 +165,52 @@ export default class CategoriesComponent extends Component {
   // };
   componentDidMount() {
     console.log(this.props);
-    alert(1);
+    // alert(1);
   }
 
   render() {
     const path = this.props.productRegistration.path;
     return (
       <View>
-        <TouchableOpacity
-          style={{justifyContent: 'center', alignItems: 'center'}}
-          onPress={() => GO('camera')}>
-          {path === null ? (
-            <Image
-              source={asset.home}
-              style={{width: 50, height: 50, backgroundColor: 'red'}}
-            />
-          ) : (
-            <Image
-              source={{uri: path}}
-              style={{
-                width: 100,
-                height: 100,
-                backgroundColor: 'transparent',
-                borderRadius: 50,
-              }}
-            />
-          )}
-          {/* <Text>{resource.title}</Text> */}
-        </TouchableOpacity>
+        <BaseHeader title={'담보 상품 등록'} closed />
+        <View style={{padding: 20, marginTop: 40}}>
+          <Text style={{fontFamily: 'SpoqaHanSans-bold'}}>등록 상품 선택</Text>
+          <RegisterItemCategories
+            action={() => GO('pictureSaveScreen')}
+            resource={{
+              text: '노트북',
+              image: asset.icon.laptop,
+            }}
+          />
+          <RegisterItemCategories
+            action={() => alert(1)}
+            resource={{
+              text: '카메라',
+              image: asset.icon.camera,
+            }}
+          />
+          <RegisterItemCategories
+            action={() => alert(1)}
+            resource={{
+              text: '가방',
+              image: asset.icon.bag,
+            }}
+          />
+          <RegisterItemCategories
+            action={() => alert(1)}
+            resource={{
+              text: '시계',
+              image: asset.icon.watch,
+            }}
+          />
+          <RegisterItemCategories
+            action={() => alert(1)}
+            resource={{
+              text: '시계',
+              image: asset.icon.watch,
+            }}
+          />
+        </View>
       </View>
     );
   }
