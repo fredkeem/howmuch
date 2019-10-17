@@ -19,10 +19,8 @@ import {BG_COLOR, POINT_COLOR} from '../../config/colors';
 import GuideSection, {GuideSectionItems} from '../../components/GuideSection';
 import AsyncStorage from '@react-native-community/async-storage';
 import {connect} from 'react-redux';
-import {InprocessContainer} from '../../components/MyList';
-// const Container = styled.View`
-//   padding-top: 40;
-// `;
+import InprocessContainer from '../../components/MyList';
+import {productList} from '../../redux/main.action';
 const Container = styled.View``;
 
 const SectionTitle = styled.Text`
@@ -31,72 +29,32 @@ const SectionTitle = styled.Text`
   letter-spacing: 1;
 `;
 
-// type Props = {
-//   user: User,
-// };
-// type State = {};
-
-// @connect(state => ({
-//   routes: state.routes,
-//   user: state.users.user,
-// }))
+@connect(state => ({
+  routes: state.routes,
+  user: state.users.user,
+  productList: state.main.productList,
+}))
 export default class HomeScene extends Base {
   constructor(props) {
     super(props);
 
-    this.state = {
-      // searchObject: null,
-      // loading: true,
-    };
+    this.state = {};
   }
 
   props: Props;
   state: State;
 
   async componentDidMount() {
-    // console.log(this.state);
-    // console.log(this.props);
-    // console.log('---------------------------', this.props.user.name);
     const r = await AsyncStorage.getAllKeys();
+    await DISPATCH(productList());
     console.log(r);
     console.log(this.props);
-    const iPad = '아이패드';
-    const iPhone = '아이폰XS';
-    // try {
-    //   const {
-    //     data: {items: searchObject},
-    //   } = await object.showSearch(iPhone);
-    //   this.setState({
-    //     searchObject,
-    //     loading: false,
-    //   });
-    // } catch (e) {
-    //   console.log(e);
-    // } finally {
-    //   this.setState({
-    //     searchObject,
-    //     loading: false,
-    //   });
-    // }
 
-    this.setStatusWhite();
+    this.setStatusBlack();
   }
-
-  // async componentDidMount() {
-  //   try {
-  //     // this.startLoading();
-  //     const r = await DISPATCH(getUserInfo(this.props.user.id));
-  //   } catch (e) {
-  //     ERROR(e);
-  //   } finally {
-  //     // this.startLoading(false);
-  //   }
-  // }
 
   render() {
     const {loading} = this.state;
-    // console.log(this.props);
-    // console.log(loading);
     return loading ? (
       <Loader />
     ) : (
@@ -106,9 +64,9 @@ export default class HomeScene extends Base {
             <SwiperComponent />
           </View>
         </Container>
-        <TextTicker />
+        {/* <TextTicker /> */}
         <View style={{margin: 20, marginRight: 0}}>
-          <SectionTitle>촬영 가이드</SectionTitle>
+          <SectionTitle>공지사항</SectionTitle>
           <GuideSection />
         </View>
         <View style={{margin: 20, marginRight: 0}}>
@@ -117,22 +75,9 @@ export default class HomeScene extends Base {
         </View>
         <View style={{margin: 20}}>
           <SectionTitle>나의 상품</SectionTitle>
-          <InprocessContainer />
-          <InprocessContainer />
-          <InprocessContainer />
+          <InprocessContainer props={this.props} />
         </View>
         <View />
-        {/* {this.state.searchObject && this.state.searchObject.length > 0 && (
-              <View>
-                {this.state.searchObject.map(item => (
-                  <View>
-                    <Text>
-                      {item.lprice} / {item.hprice} / {item.productType}
-                    </Text>
-                  </View>
-                ))}
-              </View>
-            )} */}
       </ScrollView>
     );
   }

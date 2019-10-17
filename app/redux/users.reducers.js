@@ -5,7 +5,12 @@ import Action from '../redux/actions';
 import user from '../api/userInfo';
 import type, {ActionType} from '../config/type';
 
+export const saveUser = data => ({
+  type: AUTH_RESPONSE,
+  payload: data,
+});
 const saveUserInfo = userInfo => {
+  console.log('--------------------------', userInfo);
   if (isNil(userInfo.accessToken)) {
     return;
   }

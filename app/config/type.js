@@ -34,14 +34,6 @@ export type Product = {
   payload: ?Object,
 };
 
-export type ServiceTypes =
-  | SERVICE_TYPE.ZIKTO
-  | SERVICE_TYPE.FITBIT
-  | SERVICE_TYPE.APPLE_WATCH
-  | SERVICE_TYPE.IPHONE
-  | SERVICE_TYPE.ANDROID
-  | SERVICE_TYPE.SAMSUNG_HEALTH;
-
 export type Service = {
   syncDate: string,
   serviceType: ServiceTypes,

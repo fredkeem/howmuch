@@ -1,6 +1,11 @@
 const SAVE_PHOTO = 'photo/SAVE_PHOTO';
+const CATEGORY_SELECT = 'photo/CATEGORY_SELECT';
 
 export const savePhoto = uri => ({type: SAVE_PHOTO, payload: uri});
+export const categorySave = uri => ({
+  type: CATEGORY_SELECT,
+  payload: category_1,
+});
 
 const initialState = null;
 
@@ -10,6 +15,14 @@ const photo = (state = initialState, action) => {
       return {
         ...state,
         uri: action.payload,
+      };
+    case Action.CATEGORY_SELECT:
+      return {
+        ...state,
+        category_1: payload,
+        // category_2: payload,
+        // category_3: payload,
+        // category_4: payload,
       };
   }
 };

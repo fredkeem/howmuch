@@ -5,6 +5,12 @@ import Action from './actions';
 const userRequest = (type: string, request: Promise) =>
   apiRequest(type, request, 'user');
 
+export const authUser = () => {
+  const request = api.post('/api/auth');
+
+  return userRequest(Action.AUTH_RESPONSE, request);
+};
+
 export const loginUser = (email: string, password: string) => {
   const request = api.post('/api/balance/login', {email, password});
 

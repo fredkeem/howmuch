@@ -21,6 +21,10 @@ export default class ProductScene extends Base {
   state: State;
 
   componentDidMount() {
+    // if (this.props.name === 'product') {
+    //   GO('productDetailOption');
+    // }
+    console.log(this.props);
     this.setStatusBlack();
     // console.log(this.props);
     // console.log(this.state);

@@ -1,31 +1,74 @@
 import React, {Component} from 'react';
-import {TouchableOpacity, Text, View} from 'react-native';
+import {TouchableOpacity, Text, View, AppState} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import SelectOptionButton from '../../../components/button/SelectOptionButton';
 import userInfo from '../../../api/userInfo';
 import Base from '../../../components/BaseHeader';
 import {authUser} from '../../../redux/users.actions';
+import {connect} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
+import Action from '../../../redux/actions';
+import {saveUserInfo} from '../../../redux/users.reducers';
 // import {connect} from 'react-redux';
 import _ from 'lodash';
+type Props = {
+  paused: boolean,
+};
 
-export default class Start extends Component {
+type State = {
+  appState: string,
+};
+@connect(state => ({
+  routes: state.routes,
+  user: state.users.user,
+}))
+export default class Start extends Base {
+  constructor(props) {
+    super(props);
+  }
+
   async componentDidMount() {
+    this.setStatusHidden();
+  }
+
+  async componentWillMount() {
     try {
-      const accessToken = await AsyncStorage.getItem('accessToken');
-      // const accessToken = userInfo.getAccessToken();
-      console.log(accessToken);
-      if (!_.isEmpty(accessToken)) {
-        return GO('phoneLogin');
-      }
+      let user = await AsyncStorage.getItem('userData');
+      let data = JSON.parse(user);
+      await DISPATCH({type: Action.AUTH_RESPONSE, payload: data});
     } catch (e) {
       console.log(e);
     } finally {
-      if (userInfo.isUserOk()) {
+      if (_.isEmpty(accessToken)) {
+        return GO('phoneLogin');
+      } else if (userInfo.isUserOk()) {
         GO('home');
+      } else {
+        alert(1);
       }
     }
   }
+  // challenge
+
+  //   try {
+  //     const accessToken = userInfo.getAccessToken();
+  //     console.log(accessToken);
+  //     if (_.isEmpty(accessToken)) {
+  //       // 처음으로 들어온거라면 시작화면에서 진행
+  //       alert(1);
+  //       // return SplashScreen && SplashScreen.hide();
+  //     }
+  //   } catch (e) {
+  //     console.log(e);
+  //   } finally {
+  //     // if (userInfo.isUserOk()) {
+  //     GO('home');
+  //     // } else {
+  //     //   alert(2);
+  //     // this.startLoading(false);
+  //     // }
+  //   }
+  // }
 
   // componentDidMount() {
   //   try {

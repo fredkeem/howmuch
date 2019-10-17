@@ -11,7 +11,13 @@ import {
 // import NumberTicker from 'react-native-number-ticker';
 import NumberTicker from '../components/CustomNumberTicker';
 import moment from 'moment';
-import {TINT_COLOR, BG_COLOR, POINT_COLOR} from '../config/colors';
+import {
+  TINT_COLOR,
+  BG_COLOR,
+  POINT_COLOR,
+  GREY_COLOR,
+  HOME_GREY_COLOR,
+} from '../config/colors';
 import Swiper from 'react-native-swiper';
 import Carousel, {ParallaxImage, Pagination} from 'react-native-snap-carousel';
 import styled from 'styled-components';
@@ -20,26 +26,27 @@ import Slider from './Slider';
 // import {TintButton} from '../components/button/TintButton';
 import numeral from 'numeral';
 import asset from '../config/asset';
+import {connect} from 'react-redux';
 
 const WhiteRegularText = styled.Text`
-  color: ${TINT_COLOR};
+  color: ${HOME_GREY_COLOR};
   font-family: 'SpoqaHanSans-Regular';
   font-size: 14px;
   letter-spacing: 1;
 `;
 
 const WhiteBoldText = styled.Text`
-  color: ${TINT_COLOR};
   font-family: 'SpoqaHanSans-Bold';
-  font-size: 18px;
+  font-size: 14px;
   letter-spacing: 1;
 `;
 
 const PointBoldText = styled.Text`
-  color: ${POINT_COLOR};
+  color: ${HOME_GREY_COLOR};
   font-family: 'SpoqaHanSans-Bold';
   font-size: 18px;
   letter-spacing: 1;
+  margin-bottom: 13px;
 `;
 
 const PointText = styled.Text`
@@ -50,10 +57,12 @@ const PointText = styled.Text`
 `;
 
 const SwiperCardContainer = styled.View`
-  padding: 20px;
+  padding: 30px;
   padding-top: 70px;
-  background-color: ${BG_COLOR};
+
+  background-color: #dcfff7;
 `;
+// background-color: ${BG_COLOR};
 
 // const TopIconContainer = styled.View`
 //   flex-direction: row;
@@ -70,6 +79,10 @@ const TopIcon = styled.Image`
 const SWIPER_HEIGHT = layout.height / 3;
 const sliderWidth = width;
 
+@connect(state => ({
+  routes: state.routes,
+  user: state.users.user,
+}))
 export default class SwiperComponent extends Component {
   constructor(props) {
     super(props);
@@ -86,7 +99,9 @@ export default class SwiperComponent extends Component {
       slider1ActiveSlide: 0,
     };
   }
-  componentDidMount() {}
+  componentDidMount() {
+    // console.log(this.props);
+  }
 
   requestLoan() {
     alert(1);
@@ -96,47 +111,61 @@ export default class SwiperComponent extends Component {
     const {slider1ActiveSlide, amount} = this.state;
     const leftAmount = numeral(amount).format('0,0');
     const now = new Date();
-    const currentDate = moment(now).format('YYYY. MM. DD');
+    const currentDate = moment(now).format('MM. DD');
+    console.log(this.props);
     if (slider1ActiveSlide === 0) {
       return (
         <SwiperCardContainer>
-          <WhiteRegularText>
-            {currentDate} {item.title}
-          </WhiteRegularText>
-          <PointBoldText>{numeral(item.total).format('0,0')} 원</PointBoldText>
-          <View>
-            <View style={{marginTop: 40, marginBottom: 20}}>
-              <WhiteBoldText>오늘의 잔여 대출 가능액</WhiteBoldText>
-            </View>
+          <View
+            style={{padding: 20, backgroundColor: 'white', borderRadius: 20}}>
             <View
               style={{
-                justifyContent: 'flex-start',
-                flexDirection: 'row',
-                alignItems: 'center',
+                borderBottomWidth: 1,
+                borderBottomColor: `${HOME_GREY_COLOR}`,
               }}>
+              <WhiteRegularText>
+                {currentDate} {item.title}
+              </WhiteRegularText>
+              <PointBoldText>
+                {numeral(item.total).format('0,0')} 원
+              </PointBoldText>
+            </View>
+            <View>
+              <View style={{marginTop: 13, marginBottom: 20}}>
+                <WhiteBoldText>오늘 대출 가능액</WhiteBoldText>
+              </View>
               <View
                 style={{
-                  width: 36,
-                  height: 36,
-                  marginRight: 16,
-                  borderRadius: 50,
-                  backgroundColor: `${POINT_COLOR}`,
-                }}
-              />
-              <NumberTicker
-                number={leftAmount}
-                duration={3000}
-                textStyle={{
-                  fontFamily: 'SpoqaHanSans-Bold',
-                  color: `${POINT_COLOR}`,
-                  letterSpacing: 2,
-                  lineHeight: 53,
-                }}
-              />
+                  justifyContent: 'flex-start',
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <View
+                  style={{
+                    width: 36,
+                    height: 36,
+                    marginRight: 16,
+                    borderRadius: 50,
+                    // backgroundColor: `${POINT_COLOR}`,
+                    background: 'linear-gradient(#e66465, #9198e5)',
+                  }}
+                />
+                <NumberTicker
+                  number={leftAmount}
+                  duration={3000}
+                  textStyle={{
+                    fontFamily: 'SpoqaHanSans-Bold',
+                    color: `${POINT_COLOR}`,
+                    letterSpacing: 2,
+                    lineHeight: 53,
+                  }}
+                />
+              </View>
+              <Slider />
             </View>
+
+            {/* <TintButton action={() => alert(1)} /> */}
           </View>
-          <Slider />
-          {/* <TintButton action={() => alert(1)} /> */}
         </SwiperCardContainer>
       );
     } else {

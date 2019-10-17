@@ -14,6 +14,7 @@ import _ from 'lodash';
 import {connect} from 'react-redux';
 import asset from '../../config/asset';
 import {savePhoto} from '../../redux/main.action';
+import {productCategory1, productCategory2} from '../../redux/main.action';
 import {Actions} from 'react-native-router-flux';
 import Base from '../../containers/Base';
 import BaseHeader from '../BaseHeader';
@@ -138,30 +139,27 @@ const RegisterItemCategories = ({resource, action}) => {
   );
 };
 
-// @connect(state => ({
-//   productRegistration: state.productRegistration,
-// }))
+@connect(state => ({
+  productRegistration: state.productRegistration,
+  category1: state.main.category1,
+  user: state.users.user,
+}))
 export default class CategoriesComponent extends Base {
   constructor(props) {
     super(props);
 
     this.state = {
-      // path: props.productRegistration.path,
+      path: props.productRegistration.path,
     };
   }
-
-  // componentDidMount = async () => {
-  //   try {
-  //     await DISPATCH(savePhoto());
-  //     // console.log(savePhoto());
-  //   } catch (e) {
-  //     console.log(e);
-  //   }
-  // };
-  componentDidMount() {
+  componentDidMount = async () => {
+    try {
+      await DISPATCH(productCategory1());
+    } catch (e) {
+      console.log(e);
+    }
     console.log(this.props);
-    // alert(1);
-  }
+  };
 
   render() {
     // const path = this.props.productRegistration.path;
@@ -172,7 +170,7 @@ export default class CategoriesComponent extends Base {
           <Text style={{fontFamily: 'SpoqaHanSans-bold'}}>등록 상품 선택</Text>
           <RegisterItemCategories
             action={() =>
-              GO('productDetailOption', {productDetailType: 'laptop'})
+              GO('productDetailOption', {productDetailType: '휴대폰'})
             }
             resource={{
               text: '노트북',
@@ -189,9 +187,11 @@ export default class CategoriesComponent extends Base {
             }}
           />
           <RegisterItemCategories
-            action={() => GO('productDetailOption', {productDetailType: 'bag'})}
+            action={() =>
+              GO('productDetailOption', {productDetailType: '핸드백'})
+            }
             resource={{
-              text: '가방',
+              text: '핸드백',
               image: asset.icon.bag,
             }}
           />

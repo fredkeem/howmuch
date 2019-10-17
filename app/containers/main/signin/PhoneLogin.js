@@ -9,9 +9,12 @@ import {
 } from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import * as Animatable from 'react-native-animatable';
+import {connect} from 'react-redux';
 import userInfo from '../../../api/userInfo';
+import Base from '../../Base';
 import {BG_COLOR, TINT_COLOR, POINT_COLOR} from '../../../config/colors';
 import {phoneNumber, phoneNumberLogin} from '../../../redux/users.actions';
+import AsyncStorage from '@react-native-community/async-storage';
 import _ from 'lodash';
 
 import styled from 'styled-components';
@@ -42,7 +45,19 @@ const TextInputStyle = styled.TextInput`
   font-family: 'SpoqaHanSans-bold';
 `;
 
-export default class PhoneLogin extends Component {
+type Props = {};
+
+type State = {};
+type Inputs = {
+  phoneNumber: string,
+  code: string,
+};
+
+@connect(state => ({
+  routes: state.routes,
+  user: state.users.user,
+}))
+export default class PhoneLogin extends Base {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,9 +85,9 @@ export default class PhoneLogin extends Component {
 
   phoneNumberRequest = async () => {
     try {
-      const {data: user} = await DISPATCH(phoneNumber(this.state.phoneNumber));
+      await DISPATCH(phoneNumber(this.state.phoneNumber));
       console.log(this.state.phoneNumber);
-      console.log(user);
+      // console.log('user: ', user);
     } catch (e) {
       console.log(e);
     } finally {
@@ -81,22 +96,23 @@ export default class PhoneLogin extends Component {
   };
 
   phoneNumberLogin = async () => {
+    const {phoneNumber, code} = this.state;
     try {
-      const r = await DISPATCH(
-        phoneNumberLogin(this.state.phoneNumber, this.state.code),
-      );
+      const r = await DISPATCH(phoneNumberLogin(phoneNumber, code));
+      console.log('userLogin:', r.user.data);
       const user = r.user.data;
+      // await AsyncStorage.setItem('userData', JSON.stringify(user));
+      // console.log(JSON(user), '-------------------------------');
       // console.log('user', user);
       userInfo.setUser(user);
-      console.log('data', data);
+      // console.log('data', data);
       if (!_.isEmpty(error)) {
         return alert(error);
       }
     } catch (e) {
-      ERROR(e);
+      console.log(e);
     } finally {
       GO('home');
-
       // alert(1);
     }
   };

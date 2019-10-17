@@ -26,6 +26,54 @@ export const phoneConfirm = (mobileAuthInfo: Object) => {
   return apiRequest(Action.CHECK_MOBILE_AUTH_RESPONSE, request, 'confirm');
 };
 
+// Product Categories
+export const productType = type => {
+  const request = api.get(`/api/item/${type}`);
+  // console.log(request);
+  return apiRequest(Action.PRODUCT_TYPE, request, 'type');
+};
+export const productCategory1 = category1 => {
+  const request = api.get(`/api/item/${category1}`);
+  // console.log(request);
+  return apiRequest(Action.PRODUCT_CATEGORY1, request, 'category1');
+};
+export const productCategory2 = (category1, category2) => {
+  const request = api.get(`/api/item/${category1}/${category2}`);
+  return apiRequest(Action.PRODUCT_CATEGORY2, request, 'category2');
+};
+export const productCategory3 = (category1, category2, category3) => {
+  const request = api.get(`/api/item/${category1}/${category2}/${category3}`);
+  return apiRequest(Action.PRODUCT_CATEGORY3, request, 'category3');
+};
+export const productCategory4 = (
+  category1,
+  category2,
+  category3,
+  category4,
+) => {
+  const request = api.get(
+    `/api/item/${category1}/${category2}/${category3}/${category4}`,
+  );
+  return apiRequest(Action.PRODUCT_CATEGORY4, request, 'category4');
+};
+export const productCategory5 = (
+  category1,
+  category2,
+  category3,
+  category4,
+  category5,
+) => {
+  const request = api.get(
+    `/api/item/${category1}/${category2}/${category3}/${category4}/${category5}`,
+  );
+  return apiRequest(Action.PRODUCT_CATEGORY5, request, 'category5');
+};
+
+export const productList = () => {
+  const request = api.get(`/api/user/item`);
+  return apiRequest(Action.REQUEST_PRODUCT_LIST, request, 'productList');
+};
+
 export const getRanking = (
   type: string,
   duration: string,

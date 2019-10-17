@@ -16,6 +16,14 @@ export default (
         // [key]: payload,
         path: payload,
       };
+    case Action.CATEGORY_SELECT:
+      return {
+        ...state,
+        category_1: payload,
+        // category_2: payload,
+        // category_3: payload,
+        // category_4: payload,
+      };
     default:
       return state;
   }

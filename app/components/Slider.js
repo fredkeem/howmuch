@@ -19,7 +19,7 @@ const PointText = styled.Text`
   color: ${POINT_COLOR};
   font-size: 16px;
   position: absolute;
-  top: -28px;
+  top: 0;
 `;
 
 export default class SliderComponent extends Component {
@@ -35,7 +35,7 @@ export default class SliderComponent extends Component {
     return (
       <Container>
         <View style={{flexDirection: 'row', justifyContent: 'flex-end'}}>
-          <PointText>40 %</PointText>
+          <PointText>{this.state.sliderValue}%</PointText>
         </View>
         <Slider
           maximumValue={100}
@@ -49,7 +49,7 @@ export default class SliderComponent extends Component {
             shadowColor: 'black',
             shadowOpacity: 2.0,
           }}
-          thumbStyle={{width: 14, height: 14}}
+          thumbStyle={{display: 'none'}}
           style={{height: 20}}
           step={1}
           value={this.state.sliderValue}

@@ -26,6 +26,8 @@ import CameraScreen from './product/CameraScreen';
 import PictureSaveScreen from './product/PictureSaveScreen';
 import ProductDetailOption from './product/ProductDetailOption';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {POINT_COLOR, TINT_COLOR} from '../config/colors';
+import IconAnt from 'react-native-vector-icons/AntDesign';
 
 class TabIcon extends Component {
   props: {
@@ -47,14 +49,42 @@ class TabIcon extends Component {
     // console.log(this.props);
     return (
       <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <Image
-          source={images[this.props.name]}
-          style={{marginTop: 5, width: 40, height: 25, tintColor: color}}
-          resizeMode="contain"
-        />
+        {images[this.props.name] === images.product ? (
+          <View
+            style={{
+              width: 40,
+              height: 40,
+              borderRadius: 40,
+              backgroundColor: `${POINT_COLOR}`,
+              shadowRadius: 2,
+              shadowOpacity: 0.2,
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              flexDirection: 'row',
+              paddingTop: 2,
+              justifyContent: 'center',
+              alignItems: 'center',
+              position: 'absolute',
+              // top: -55,
+            }}>
+            <IconAnt name={'pluscircleo'} size={20} color={`${TINT_COLOR}`} />
+          </View>
+        ) : (
+          <Image
+            source={images[this.props.name]}
+            style={{marginTop: 5, width: 40, height: 25, tintColor: color}}
+            resizeMode="contain"
+          />
+        )}
         {this.props.focused && (
           <Text style={{color, fontSize: 10, fontWeight: 'bold'}}>
-            {this.props.title}
+            {images[this.props.name] === images.product ? (
+              <View />
+            ) : (
+              this.props.name
+            )}
           </Text>
         )}
       </View>
@@ -66,7 +96,9 @@ export default class AppRouter extends Component {
   props: Props;
   state: State;
 
-  componentDidMount() {}
+  componentDidMount() {
+    // console.log(this.props);
+  }
 
   reducerCreate(params) {
     const routerReducer = new Reducer(params);
@@ -112,15 +144,15 @@ export default class AppRouter extends Component {
                   component={ProductRegistration}
                 />
                 <Scene key={'tutorial'} component={Tutorial} />
-                <Scene key={'cameraScreen'} component={CameraScreen} />
-                <Scene
-                  key={'pictureSaveScreen'}
-                  component={PictureSaveScreen}
-                />
                 <Scene
                   key={'productDetailOption'}
                   component={ProductDetailOption}
                 />
+                <Scene
+                  key={'pictureSaveScreen'}
+                  component={PictureSaveScreen}
+                />
+                <Scene key={'cameraScreen'} component={CameraScreen} />
                 <Tabs
                   key="tabsContainer"
                   showLabel={false}
@@ -134,8 +166,8 @@ export default class AppRouter extends Component {
                   tabBarStyle={{
                     backgroundColor: 'white',
                     height: 60,
-                    borderTopWidth: 1,
-                    borderColor: '#CECECE',
+                    borderTopWidth: 0.5,
+                    borderColor: '#c3c3c3',
                   }}>
                   <Scene
                     name="home"
