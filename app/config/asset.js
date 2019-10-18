@@ -7,6 +7,7 @@ export default {
   info: require('../assets/image/home/info.png'),
   notification: require('../assets/image/home/notification.png'),
   swipe_banner: require('../assets/image/swipe_banner/swipeBanner.png'),
+  empty_product: require('../assets/image/home/empty_product.png'),
   icon: {
     computer: require('../assets/image/product_icon/computer.png'),
     laptop: require('../assets/image/product_icon/laptop.png'),

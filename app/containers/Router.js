@@ -25,6 +25,8 @@ import Tutorial from './information/Tutorials';
 import CameraScreen from './product/CameraScreen';
 import PictureSaveScreen from './product/PictureSaveScreen';
 import ProductDetailOption from './product/ProductDetailOption';
+import ProductLoanStatusFirst from './loanStatus/ProductLoanStatusFirst';
+
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {POINT_COLOR, TINT_COLOR} from '../config/colors';
 import IconAnt from 'react-native-vector-icons/AntDesign';
@@ -81,7 +83,7 @@ class TabIcon extends Component {
         {this.props.focused && (
           <Text style={{color, fontSize: 10, fontWeight: 'bold'}}>
             {images[this.props.name] === images.product ? (
-              <View />
+              <Text />
             ) : (
               this.props.name
             )}
@@ -153,6 +155,10 @@ export default class AppRouter extends Component {
                   component={PictureSaveScreen}
                 />
                 <Scene key={'cameraScreen'} component={CameraScreen} />
+                <Scene
+                  key={'productLoanStatusFirst'}
+                  component={ProductLoanStatusFirst}
+                />
                 <Tabs
                   key="tabsContainer"
                   showLabel={false}

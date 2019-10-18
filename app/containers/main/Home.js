@@ -29,6 +29,23 @@ const SectionTitle = styled.Text`
   letter-spacing: 1;
 `;
 
+const EmptyImageContainer = styled.TouchableOpacity`
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+`;
+
+const EmptyImageItem = styled.Image`
+  margin-vertical: 30px;
+  width: 70%;
+`;
+
+const EmptyImageText = styled.Text`
+  font-family: 'SpoqaHanSans-regular'
+  text-align: center;
+  font-size: 18px;
+`;
+
 @connect(state => ({
   routes: state.routes,
   user: state.users.user,
@@ -55,27 +72,41 @@ export default class HomeScene extends Base {
 
   render() {
     const {loading} = this.state;
+    const productList = this.props.productList && this.props.productList.data;
+    // console.log(productList.length);
     return loading ? (
       <Loader />
     ) : (
-      <ScrollView>
+      <ScrollView contentContainerStyle={{paddingVertical: 20}}>
         <Container>
           <View>
             <SwiperComponent />
           </View>
         </Container>
         {/* <TextTicker /> */}
-        <View style={{margin: 20, marginRight: 0}}>
-          <SectionTitle>공지사항</SectionTitle>
+        <View style={{marginHorizontal: 20}}>
+          <SectionTitle>대출 정보</SectionTitle>
           <GuideSection />
         </View>
-        <View style={{margin: 20, marginRight: 0}}>
-          <SectionTitle>이벤트</SectionTitle>
+        <View style={{marginVertical: 20}}>
+          <SectionTitle style={{marginHorizontal: 20}}>공지 사항</SectionTitle>
           <SwiperBanner />
         </View>
-        <View style={{margin: 20}}>
+        <View style={{marginHorizontal: 20}}>
           <SectionTitle>나의 상품</SectionTitle>
-          <InprocessContainer props={this.props} />
+          {productList.length === 0 ? (
+            <EmptyImageContainer onPress={() => GO('product')}>
+              <EmptyImageItem
+                resizeMode="contain"
+                source={asset.empty_product}
+              />
+              <EmptyImageText>
+                빠르고 쉬운 '얼마야'를 통해 {'\n'} 대출을 받아보세요.
+              </EmptyImageText>
+            </EmptyImageContainer>
+          ) : (
+            <InprocessContainer props={this.props} />
+          )}
         </View>
         <View />
       </ScrollView>

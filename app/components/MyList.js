@@ -8,12 +8,12 @@ import {
   GREY_COLOR,
   HOME_GREY_COLOR,
 } from '../config/colors';
-import IconAnt from 'react-native-vector-icons/Feather';
+import IconFeather from 'react-native-vector-icons/Feather';
 import numeral from 'numeral';
 import SelectOptionButton from './button/SelectOptionButton';
 
 const Container = styled.TouchableOpacity`
-  margin-vertical: 10px;
+  margin-vertical: 20px;
   flex-direction: row;
   justify-content: space-between;
 `;
@@ -61,21 +61,53 @@ const PriceContainer = styled.View`
   padding-vertical: 10px;
 `;
 
+const ListDetailTop = styled.View`
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  border-bottom-width: 1px;
+  padding-bottom: 5px;
+  border-bottom-color: ${GREY_COLOR};
+`;
+
+const BoldText = styled.Text`
+  font-family: 'SpoqaHanSans-bold';
+  font-size: 14px;
+`;
+const RegularText = styled.Text`
+  font-family: 'SpoqaHanSans-regular';
+  font-size: 14px;
+`;
 const loanButtonColorOption = {
   defaultBackgroundColor: '#DCFFF7',
   defaultTextColor: '#00EEB6',
   loanButtonStyle: {
     width: '100%',
-    height: 40,
+    height: 45,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: 5,
+    marginBottom: 10,
   },
   loanButtonTextStyle: {
     fontSize: 14,
     fontFamily: 'SpoqaHanSans-bold',
   },
+  loanBorderButtonStyle: {
+    width: '100%',
+    height: 45,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    borderWidth: 1,
+    borderBottomColor: '#00EEB6',
+    borderLeftColor: '#00EEB6',
+    borderRightColor: '#00EEB6',
+    borderTopColor: '#00EEB6',
+    marginBottom: 10,
+  },
 };
+
 // export default class InprocessContainer extends Component {
 
 // }
@@ -98,21 +130,15 @@ export default class InprocessContainer extends Component {
             <ImageItem source={{uri: item.picture1}} />
           </ImageContainer>
           <StatusDescriptionContainer>
-            <View
-              style={{
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                flexDirection: 'row',
-                borderBottomWidth: 1,
-                paddingBottom: 5,
-                borderBottomColor: `${GREY_COLOR}`,
-              }}>
+            <ListDetailTop>
               <ProductName>이름</ProductName>
-              <StatusText>대기중</StatusText>
-              {/* <StatusColorBox>
-              <StatusText>대출중</StatusText>
-            </StatusColorBox> */}
-            </View>
+              <If condition={item.status === 1}>
+                <StatusText>대기중</StatusText>
+              </If>
+              <If condition={item.status === 2 || 3 || 4 || 5}>
+                <StatusText style={{color: `${POINT_COLOR}`}}>50%</StatusText>
+              </If>
+            </ListDetailTop>
             <PriceContainer>
               <View>
                 <View
@@ -121,20 +147,18 @@ export default class InprocessContainer extends Component {
                     alignItems: 'center',
                     justifyContent: 'flex-start',
                   }}>
-                  <IconAnt
+                  <IconFeather
                     name={'chevron-up'}
                     size={20}
                     style={{marginRight: 5}}
                     color={'#d63031'}
                   />
-                  <Text
+                  <RegularText
                     style={{
-                      fontFamily: 'SpoqaHanSans-Regular',
-                      fontSize: 14,
                       color: '#d63031',
                     }}>
                     최고
-                  </Text>
+                  </RegularText>
                 </View>
                 <View
                   style={{
@@ -142,39 +166,33 @@ export default class InprocessContainer extends Component {
                     alignItems: 'center',
                     justifyContent: 'flex-start',
                   }}>
-                  <IconAnt
+                  <IconFeather
                     name={'chevron-down'}
                     size={20}
                     style={{marginRight: 5}}
                     color={'#0984e3'}
                   />
-                  <Text
+                  <RegularText
                     style={{
-                      fontFamily: 'SpoqaHanSans-Regular',
-                      fontSize: 14,
                       color: '#0984e3',
                     }}>
                     최저 시세
-                  </Text>
+                  </RegularText>
                 </View>
               </View>
               <View>
-                <Text
+                <RegularText
                   style={{
-                    fontFamily: 'SpoqaHanSans-Regular',
-                    fontSize: 14,
                     textAlign: 'right',
                   }}>
                   {numeral(item.valuation2).format('0,0')} 원
-                </Text>
-                <Text
+                </RegularText>
+                <RegularText
                   style={{
-                    fontFamily: 'SpoqaHanSans-Regular',
-                    fontSize: 14,
                     textAlign: 'right',
                   }}>
                   {numeral(item.valuation1).format('0,0')} 원
-                </Text>
+                </RegularText>
               </View>
             </PriceContainer>
             <View
@@ -183,33 +201,90 @@ export default class InprocessContainer extends Component {
                 flexDirection: 'row',
                 // marginTop: 10,
               }}>
-              <Text style={{fontFamily: 'SpoqaHanSans-Bold', fontSize: 14}}>
-                예상 거래 금액
-              </Text>
-              <Text style={{fontFamily: 'SpoqaHanSans-Bold', fontSize: 14}}>
-                {numeral(item.valuation1).format('0,0')} 원
-              </Text>
+              <BoldText>예상 거래 금액</BoldText>
+              <BoldText>{numeral(item.valuation1).format('0,0')} 원</BoldText>
             </View>
           </StatusDescriptionContainer>
         </Container>
-        <SelectOptionButton
-          defaultTextColor={loanButtonColorOption.defaultTextColor}
-          defaultBackgroundColor={loanButtonColorOption.defaultBackgroundColor}
-          selectTextColor={loanButtonColorOption.defaultTextColor}
-          buttonStyle={loanButtonColorOption.loanButtonStyle}
-          textStyle={loanButtonColorOption.loanButtonTextStyle}
-          text="대출 하기"
-          onPressOutButton={() => GO('product')}
-        />
+        <If condition={item.status === 1}>
+          <SelectOptionButton
+            defaultTextColor={loanButtonColorOption.defaultTextColor}
+            defaultBackgroundColor={
+              loanButtonColorOption.defaultBackgroundColor
+            }
+            selectTextColor={loanButtonColorOption.defaultTextColor}
+            buttonStyle={loanButtonColorOption.loanButtonStyle}
+            textStyle={loanButtonColorOption.loanButtonTextStyle}
+            text="대출 하기"
+            onPressOutButton={() => GO('productLoanStatusFirst', {item})}
+          />
+        </If>
+        <If condition={item.status === 2}>
+          <View
+            style={{
+              flexDirection: 'row',
+              width: '100%',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <SelectOptionButton
+              defaultTextColor={loanButtonColorOption.defaultTextColor}
+              defaultBackgroundColor={
+                loanButtonColorOption.defaultBackgroundColor
+              }
+              selectTextColor={loanButtonColorOption.defaultTextColor}
+              buttonStyle={loanButtonColorOption.loanButtonStyle}
+              textStyle={loanButtonColorOption.loanButtonTextStyle}
+              text="중도 상환"
+              onPressOutButton={() => GO('product')}
+            />
+            <SelectOptionButton
+              defaultTextColor={loanButtonColorOption.defaultTextColor}
+              defaultBackgroundColor={
+                loanButtonColorOption.defaultBackgroundColor
+              }
+              selectTextColor={loanButtonColorOption.defaultTextColor}
+              buttonStyle={loanButtonColorOption.loanButtonStyle}
+              textStyle={loanButtonColorOption.loanButtonTextStyle}
+              text="추가 대출"
+              onPressOutButton={() => GO('product')}
+            />
+          </View>
+        </If>
+        <If condition={item.status === 3}>
+          <SelectOptionButton
+            defaultTextColor={loanButtonColorOption.defaultTextColor}
+            defaultBackgroundColor={
+              loanButtonColorOption.defaultBackgroundColor
+            }
+            selectTextColor={loanButtonColorOption.defaultTextColor}
+            buttonStyle={loanButtonColorOption.loanBorderButtonStyle}
+            textStyle={loanButtonColorOption.loanButtonTextStyle}
+            text="추가 대출 감정가 확인"
+            onPressOutButton={() => GO('productLoanStatusFirst', {item})}
+          />
+        </If>
+        <If condition={item.status === 4}>
+          <SelectOptionButton
+            defaultTextColor={loanButtonColorOption.defaultTextColor}
+            defaultBackgroundColor={
+              loanButtonColorOption.defaultBackgroundColor
+            }
+            selectTextColor={loanButtonColorOption.defaultTextColor}
+            buttonStyle={loanButtonColorOption.loanButtonStyle}
+            textStyle={loanButtonColorOption.loanButtonTextStyle}
+            text="대출 자세히 보기"
+            onPressOutButton={() => GO('productLoanStatusFirst', {item})}
+          />
+        </If>
       </View>
     );
   };
 
   render() {
-    // console.log(this.props, '---------------------asdasdasdada');
     const productList =
       this.props.props.productList && this.props.props.productList.data;
-    // console.log(productList.length, '------------------------');
+    console.log(productList);
     return (
       <View>
         <FlatList data={productList} renderItem={this._productRenderItem} />

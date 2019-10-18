@@ -16,10 +16,10 @@ const WhiteText = styled.Text`
 `;
 
 const PointText = styled.Text`
-  color: ${POINT_COLOR};
+  color: ${TINT_COLOR};
   font-size: 16px;
   position: absolute;
-  top: 0;
+  top: -93;
 `;
 
 export default class SliderComponent extends Component {
@@ -47,7 +47,7 @@ export default class SliderComponent extends Component {
             height: 2,
             shadowOffset: {width: 1, height: 3},
             shadowColor: 'black',
-            shadowOpacity: 2.0,
+            shadowOpacity: 0.3,
           }}
           thumbStyle={{display: 'none'}}
           style={{height: 20}}

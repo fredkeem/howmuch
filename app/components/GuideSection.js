@@ -10,79 +10,105 @@ import {
 import styled from 'styled-components';
 import {POINT_COLOR} from '../config/colors';
 import asset from '../config/asset';
+import IconFeather from 'react-native-vector-icons/Feather';
 
 const ItemBubble = styled.TouchableOpacity`
-  justify-content: center;
+  width: 100%;
+  height: 120px;
+  justify-content: flex-start;
   align-items: center;
-  margin-top: 20px;
-  margin-right: 32px;
+  margin-top: 10px;
+  border: 1px solid #f0f0f0;
+  border-radius: 10px;
 `;
 
 const ImageContainer = styled.View`
-  width: 60px;
-  height: 60px;
-  border-radius: 60px
-  background-color: ${POINT_COLOR};
-  justify-content: center;
+  background-color: #f0f0f0;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  height: 40px;
+  width: 100%;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  padding-horizontal: 20;
+`;
+
+const BoldText = styled.Text`
+  font-family: 'SpoqaHanSans-bold';
 `;
 
 const GuideSectionItem = ({resource, action}) => (
   <ItemBubble onPress={action}>
     <ImageContainer>
       <Image
-        style={{width: 33, height: 33}}
+        style={{width: 24, height: 24, marginRight: 14}}
         resizeMode="contain"
         source={resource.image}
       />
+      <BoldText>{resource.title}</BoldText>
     </ImageContainer>
-    <Text
-      style={{fontFamily: 'SpoqaHanSans-Regular', marginTop: 3, fontSize: 12}}>
-      {resource.title}
-    </Text>
+    <View
+      style={{
+        width: '100%',
+        paddingHorizontal: 20,
+        paddingVertical: 10,
+        justifyContent: 'center',
+        alignItems: 'flex-start',
+      }}>
+      <BoldText style={{fontSize: 16, lineHeight: 35}}>맥북 15inch</BoldText>
+      <View
+        style={{
+          flexDirection: 'row',
+          width: '100%',
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+            marginRight: 20,
+          }}>
+          <IconFeather
+            name={'chevron-up'}
+            size={16}
+            style={{marginRight: 5, paddingTop: 2}}
+            color={'#d63031'}
+          />
+          <Text
+            style={{
+              fontFamily: 'SpoqaHanSans-Regular',
+              fontSize: 14,
+              color: '#d63031',
+            }}>
+            1,000,000 원
+          </Text>
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          }}>
+          <IconFeather
+            name={'chevron-down'}
+            size={16}
+            style={{marginRight: 5, paddingTop: 2}}
+            color={'#0984e3'}
+          />
+          <Text
+            style={{
+              fontFamily: 'SpoqaHanSans-Regular',
+              fontSize: 14,
+              color: '#0984e3',
+            }}>
+            800,000 원
+          </Text>
+        </View>
+      </View>
+    </View>
   </ItemBubble>
 );
-
-// const GuideSectionItems = () => (
-//   <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-//     <GuideSectionItem
-//       action={this.actionTest.bind(this)}
-//       resource={{
-//         image: asset.icon.laptop,
-//         title: '노트북',
-//       }}
-//     />
-//     <GuideSectionItem
-//       action={GOF('tutorial')}
-//       resource={{
-//         image: asset.icon.compouter,
-//         title: '데스크탑',
-//       }}
-//     />
-//     <GuideSectionItem
-//       action={GOF('tutorial')}
-//       resource={{
-//         image: asset.icon.bag,
-//         title: '가방',
-//       }}
-//     />
-//     <GuideSectionItem
-//       action={GOF('tutorial')}
-//       resource={{
-//         image: asset.icon.watch,
-//         title: '시계',
-//       }}
-//     />
-//     <GuideSectionItem
-//       action={GOF('tutorial')}
-//       resource={{
-//         image: asset.icon.watch,
-//         title: '아이폰',
-//       }}
-//     />
-//   </ScrollView>
-// );
-
 export default class GuideSection extends Component {
   constructor(props) {
     super(props);
@@ -104,43 +130,15 @@ export default class GuideSection extends Component {
 
   render() {
     return (
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      <View style={{width: '100%'}}>
         <GuideSectionItem
           action={this.onPressGuideLaptop}
           resource={{
             image: asset.icon.laptop,
-            title: '노트북',
+            title: '노트북 중고 시세',
           }}
         />
-        <GuideSectionItem
-          action={this.onPressGuideComputer}
-          resource={{
-            image: asset.icon.camera,
-            title: '카메라',
-          }}
-        />
-        <GuideSectionItem
-          action={this.onPressGuideBag}
-          resource={{
-            image: asset.icon.bag,
-            title: '가방',
-          }}
-        />
-        <GuideSectionItem
-          action={this.onPressGuideWatch}
-          resource={{
-            image: asset.icon.watch,
-            title: '시계',
-          }}
-        />
-        <GuideSectionItem
-          action={this.onPressGuideWatch}
-          resource={{
-            image: asset.icon.watch,
-            title: '아이폰',
-          }}
-        />
-      </ScrollView>
+      </View>
     );
   }
 }

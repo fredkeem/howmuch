@@ -27,10 +27,17 @@ import Slider from './Slider';
 import numeral from 'numeral';
 import asset from '../config/asset';
 import {connect} from 'react-redux';
+import SelectOptionButton from './button/SelectOptionButton';
+import * as Animatable from 'react-native-animatable';
+import LinearGradient from 'react-native-linear-gradient';
 
-const WhiteRegularText = styled.Text`
-  color: ${HOME_GREY_COLOR};
-  font-family: 'SpoqaHanSans-Regular';
+const BoldText = styled.Text`
+  font-family: 'SpoqaHanSans-bold';
+  font-size: 14px;
+  letter-spacing: 1;
+`;
+const RegularText = styled.Text`
+  font-family: 'SpoqaHanSans-regular';
   font-size: 14px;
   letter-spacing: 1;
 `;
@@ -56,25 +63,30 @@ const PointText = styled.Text`
   font-size: 40px;
 `;
 
-const SwiperCardContainer = styled.View`
-  padding: 30px;
-  padding-top: 70px;
-
-  background-color: #dcfff7;
-`;
-// background-color: ${BG_COLOR};
-
-// const TopIconContainer = styled.View`
-//   flex-direction: row;
-//   justify-content: flex-end;
-//   margin-bottom: 30px;
-// `;
+const SwiperCardContainer = styled.View``;
 
 const TopIcon = styled.Image`
   width: 25px;
   height: 25px;
   border-radius: 30px;
 `;
+
+const loanButtonColorOption = {
+  defaultBackgroundColor: '#DCFFF7',
+  defaultTextColor: '#00EEB6',
+  loanButtonStyle: {
+    width: '100%',
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginTop: 10,
+  },
+  loanButtonTextStyle: {
+    fontSize: 14,
+    fontFamily: 'SpoqaHanSans-bold',
+  },
+};
 
 const SWIPER_HEIGHT = layout.height / 3;
 const sliderWidth = width;
@@ -116,23 +128,38 @@ export default class SwiperComponent extends Component {
     if (slider1ActiveSlide === 0) {
       return (
         <SwiperCardContainer>
-          <View
-            style={{padding: 20, backgroundColor: 'white', borderRadius: 20}}>
-            <View
-              style={{
-                borderBottomWidth: 1,
-                borderBottomColor: `${HOME_GREY_COLOR}`,
-              }}>
-              <WhiteRegularText>
-                {currentDate} {item.title}
-              </WhiteRegularText>
-              <PointBoldText>
+          <Animatable.View
+            animation="bounceInDown"
+            style={{padding: 20, backgroundColor: 'white'}}>
+            <View style={{paddingVertical: 15}}>
+              <BoldText>
+                {item.title}&nbsp;&nbsp;|&nbsp;&nbsp;
                 {numeral(item.total).format('0,0')} 원
-              </PointBoldText>
+              </BoldText>
             </View>
-            <View>
-              <View style={{marginTop: 13, marginBottom: 20}}>
-                <WhiteBoldText>오늘 대출 가능액</WhiteBoldText>
+            <View
+              // colors={['#4c669f', '#3b5998', '#192f6a']}
+              style={{
+                // backgroundColor: '#16E9B4',
+                padding: 20,
+                borderRadius: 20,
+                shadowRadius: 2,
+                ...Platform.select({
+                  ios: {
+                    shadowColor: '#000',
+                    shadowOffset: {
+                      width: 2,
+                      height: 6,
+                    },
+                    shadowOpacity: 0.1,
+                  },
+                  android: {
+                    elevation: 3,
+                  },
+                }),
+              }}>
+              <View style={{marginBottom: 20}}>
+                <RegularText>현재 대출 가능액</RegularText>
               </View>
               <View
                 style={{
@@ -147,7 +174,7 @@ export default class SwiperComponent extends Component {
                     marginRight: 16,
                     borderRadius: 50,
                     // backgroundColor: `${POINT_COLOR}`,
-                    background: 'linear-gradient(#e66465, #9198e5)',
+                    // background: 'linear-gradient(#e66465, #9198e5)',
                   }}
                 />
                 <NumberTicker
@@ -155,17 +182,26 @@ export default class SwiperComponent extends Component {
                   duration={3000}
                   textStyle={{
                     fontFamily: 'SpoqaHanSans-Bold',
-                    color: `${POINT_COLOR}`,
+                    color: `${TINT_COLOR}`,
                     letterSpacing: 2,
                     lineHeight: 53,
                   }}
                 />
               </View>
               <Slider />
+              <SelectOptionButton
+                defaultTextColor={loanButtonColorOption.defaultTextColor}
+                defaultBackgroundColor={
+                  loanButtonColorOption.defaultBackgroundColor
+                }
+                selectTextColor={loanButtonColorOption.defaultTextColor}
+                buttonStyle={loanButtonColorOption.loanButtonStyle}
+                textStyle={loanButtonColorOption.loanButtonTextStyle}
+                text="대출금 신청하기"
+                onPressOutButton={() => GO('product')}
+              />
             </View>
-
-            {/* <TintButton action={() => alert(1)} /> */}
-          </View>
+          </Animatable.View>
         </SwiperCardContainer>
       );
     } else {
@@ -177,8 +213,8 @@ export default class SwiperComponent extends Component {
               source={asset.swipe_banner}
               resizeMode="contain"
             />
-            <WhiteRegularText>{item.date}</WhiteRegularText>
-            <WhiteBoldText>{item.title}</WhiteBoldText>
+            <Text>{item.date}</Text>
+            <Text>{item.title}</Text>
           </TouchableOpacity>
         </View>
       );

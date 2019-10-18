@@ -3,7 +3,7 @@ import {TouchableOpacity, Text, View, AppState} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import SelectOptionButton from '../../../components/button/SelectOptionButton';
 import userInfo from '../../../api/userInfo';
-import Base from '../../../components/BaseHeader';
+import Base from '../../../containers/Base';
 import {authUser} from '../../../redux/users.actions';
 import {connect} from 'react-redux';
 import AsyncStorage from '@react-native-community/async-storage';
